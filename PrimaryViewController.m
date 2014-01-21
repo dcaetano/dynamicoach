@@ -5,15 +5,31 @@
 //  Created by Danilo on 1/15/14.
 //  Copyright (c) 2014 dcaetano. All rights reserved.
 //
-
-// Bug notes:
+//******************************************************************
+// BUG NOTES / TO-DO LIST:
+// Priority 1
+// - Substitution functionality
+//   > Active roster / bench and interchange between the two
+//   > Press/hold to drag and position
 // - Need a better eraser that doesn't erase the field background
-// - Missing rgb picker
+// - Missing "Stop" functionality in "Stopwatch"
+// - Missing "Enable draw" button to toggle drawable
+//
+// Priority 2
+// - Missing RGB picker
 // - Missing brush size selector
 // - When saving the image, needs to include players as well!
-// - Need icons/graphics for better UI
+// - "Undo" button drawing
 //
-
+// Priority UI
+// - Update UI as a whole
+//   > TableViewCell
+//   > Color scheme
+//   > Font
+//   > Logos, loading page, app icon
+//   > Need icons
+//
+//******************************************************************
 
 #import "PrimaryViewController.h"
 
@@ -37,7 +53,7 @@
     red = 0.0/255.0;
     green = 0.0/255.0;
     blue = 0.0/255.0;
-    brush = 5.0;
+    brush = 3.0;
     opacity = 1.0;
     
     [super viewDidLoad];
@@ -356,9 +372,9 @@
 }
 
 - (IBAction)stopStopwatchPressed:(id)sender {
-    stopWatchTimerLabel.text = @"00:00:00:00";
     [stopWatchTimer invalidate];
     stopWatchTimer = nil;
+    stopWatchTimerLabel.text = @"00:00:00:00";
     [self updateTimer];
 }
 
@@ -382,13 +398,16 @@
     controllerView.hidden = YES;
     formationView.hidden = YES;
 }
-
+//******************************************************************
 //Keyboard Methods
+//******************************************************************
 -(void) returnKeyboard {
     [self.view endEditing:YES];
 }
 
+//******************************************************************
 //Table Delegate Methods
+//******************************************************************
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"PlayerCell";
@@ -410,7 +429,9 @@
     return [playerList_lastName count];
 }
 
+//******************************************************************
 //Drawing Methods
+//******************************************************************
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     mouseSwiped = NO;
