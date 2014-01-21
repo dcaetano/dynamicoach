@@ -6,6 +6,15 @@
 //  Copyright (c) 2014 dcaetano. All rights reserved.
 //
 
+// Bug notes:
+// - Need a better eraser that doesn't erase the field background
+// - Missing rgb picker
+// - Missing brush size selector
+// - When saving the image, needs to include players as well!
+// - Need icons/graphics for better UI
+//
+
+
 #import "PrimaryViewController.h"
 
 @interface PrimaryViewController ()
@@ -25,6 +34,12 @@
 
 - (void)viewDidLoad
 {
+    red = 0.0/255.0;
+    green = 0.0/255.0;
+    blue = 0.0/255.0;
+    brush = 5.0;
+    opacity = 1.0;
+    
     [super viewDidLoad];
     
     stopWatchTimer = [[NSTimer alloc] init];
@@ -393,6 +408,101 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [playerList_lastName count];
+}
+
+//Drawing Methods
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    mouseSwiped = NO;
+    UITouch *touch = [touches anyObject];
+    lastPoint = [touch locationInView:drawingView];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    mouseSwiped = YES;
+    UITouch *touch = [touches anyObject];
+    CGPoint currentPoint = [touch locationInView:drawingView];
+    
+    UIGraphicsBeginImageContext(drawingView.frame.size);
+    [tempDrawImage.image drawInRect:CGRectMake(0, 0, drawingView.frame.size.width, drawingView.frame.size.height)];
+    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+    CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+    
+    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+    [tempDrawImage setAlpha:opacity];
+    UIGraphicsEndImageContext();
+    
+    lastPoint = currentPoint;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    if(!mouseSwiped) {
+        UIGraphicsBeginImageContext(drawingView.frame.size);
+        [tempDrawImage.image drawInRect:CGRectMake(0, 0, drawingView.frame.size.width, drawingView.frame.size.height)];
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+        CGContextStrokePath(UIGraphicsGetCurrentContext());
+        CGContextFlush(UIGraphicsGetCurrentContext());
+        tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
+    UIGraphicsBeginImageContext(mainImage.frame.size);
+    [mainImage.image drawInRect:CGRectMake(0, 0, drawingView.frame.size.width, drawingView.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
+    [tempDrawImage.image drawInRect:CGRectMake(0, 0, drawingView.frame.size.width, drawingView.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
+    mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
+    tempDrawImage.image = nil;
+    UIGraphicsEndImageContext();
+}
+
+- (IBAction)reset:(id)sender {
+    mainImage.image = nil;
+    [mainImage setImage:[UIImage imageNamed:@"soccerField2"]];
+}
+
+-(IBAction)saveDrawingButton:(id)sender {
+    UIGraphicsBeginImageContextWithOptions(mainImage.bounds.size, NO,0.0);
+    [mainImage.image drawInRect:CGRectMake(0, 0, mainImage.frame.size.width, mainImage.frame.size.height)];
+    UIImage *SaveImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImageWriteToSavedPhotosAlbum(SaveImage, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    // Was there an error?
+    if (error != NULL)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Image could not be saved.Please try again"  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
+        [alert show];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Image was successfully saved in photoalbum"  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
+        [alert show];
+    }
+}
+
+- (IBAction)eraserPressed:(id)sender {
+    
+    red = 255.0/255.0;
+    green = 255.0/255.0;
+    blue = 255.0/255.0;
+    opacity = 1.0;
+}
+
+-(IBAction)blackPencilPressed:(id)sender {
+    red = 0.0/255.0;
+    green = 0.0/255.0;
+    blue = 0.0/255.0;
 }
 
 @end

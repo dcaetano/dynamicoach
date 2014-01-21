@@ -65,8 +65,24 @@
     IBOutlet UITextField *phoneNumber;
     IBOutlet UITextField *emailAddress;
     
+    //Stopwatch section
     IBOutlet UILabel *stopWatchTimerLabel;
     NSTimer *stopWatchTimer;
+    
+    //Drawable section
+    IBOutlet UIView *drawingView;
+    IBOutlet UIImageView *mainImage;
+    IBOutlet UIImageView *tempDrawImage;
+    IBOutlet UIButton *eraserButton;
+    IBOutlet UIButton *saveDrawingButton;
+    IBOutlet UIButton *resetDrawingButton;
+    CGPoint lastPoint;
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat brush;
+    CGFloat opacity;
+    BOOL mouseSwiped;
 }
 
 @property (strong, nonatomic) NSString *databasePath;
@@ -81,5 +97,9 @@
 -(IBAction)rosterButtonPressed:(id)sender;
 -(IBAction)formationButtonPressed:(id)sender;
 -(IBAction)clearRosterButtonPressed:(id)sender;
+-(IBAction)reset:(id)sender;
+-(IBAction)eraserPressed:(id)sender;
+-(IBAction)blackPencilPressed:(id)sender;
+-(IBAction)saveDrawingButton:(id)sender;
 
 @end

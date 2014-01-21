@@ -13,12 +13,15 @@
                 <outlet property="clearRosterButton" destination="s7G-iR-K8f" id="7iI-oz-qxo"/>
                 <outlet property="contactButton" destination="40L-V0-Qhn" id="Y7d-dW-I7S"/>
                 <outlet property="controllerView" destination="PXr-Qw-q0c" id="lZr-BP-9Sa"/>
+                <outlet property="drawingView" destination="10b-pN-yUA" id="ivN-Cd-bbY"/>
                 <outlet property="emailAddress" destination="JqX-LD-zb5" id="KYV-6S-Pa7"/>
+                <outlet property="eraserButton" destination="Zqa-Vp-714" id="mkC-qG-Z49"/>
                 <outlet property="firstName" destination="x8D-H7-vU1" id="XiU-md-fhL"/>
                 <outlet property="formationBackButton" destination="e1G-H6-h4q" id="CZa-WF-iM5"/>
                 <outlet property="formationButton" destination="chA-OI-fsC" id="HcN-mb-e6g"/>
                 <outlet property="formationView" destination="Zlc-5r-CKA" id="4xb-RJ-rly"/>
                 <outlet property="lastName" destination="GQ4-fm-qXK" id="NPr-l5-ZeM"/>
+                <outlet property="mainImage" destination="6on-8g-S60" id="kea-Gy-HfT"/>
                 <outlet property="mainMenuView" destination="qAI-tK-Ykp" id="JAP-bj-PL1"/>
                 <outlet property="phoneNumber" destination="3sG-Cm-Lfm" id="cCw-UF-WQE"/>
                 <outlet property="player0Button" destination="Zuu-UH-YGY" id="NEx-cJ-KFv"/>
@@ -43,10 +46,13 @@
                 <outlet property="player8View" destination="hPC-0P-q20" id="kuO-3J-KNa"/>
                 <outlet property="player9Button" destination="KwW-Jl-zqL" id="tcb-xv-ey6"/>
                 <outlet property="player9View" destination="7tO-ht-p82" id="VNd-Q9-rIi"/>
+                <outlet property="resetDrawingButton" destination="KKB-Wj-Fgs" id="yyw-dj-ujq"/>
                 <outlet property="rosterBackButton" destination="6F7-cx-dId" id="muz-ys-5Hw"/>
                 <outlet property="rosterButton" destination="1Qn-At-8oX" id="XYZ-uz-Axo"/>
                 <outlet property="rosterTable" destination="DYh-D0-kLN" id="nlw-IP-im1"/>
+                <outlet property="saveDrawingButton" destination="1IO-ZP-ihm" id="DZR-fa-PWF"/>
                 <outlet property="stopWatchTimerLabel" destination="AtD-6p-ofs" id="nJV-xa-oLA"/>
+                <outlet property="tempDrawImage" destination="YxB-mM-9O8" id="b5b-pV-Bgi"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -339,14 +345,79 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqa-Vp-714">
+                            <rect key="frame" x="120" y="468" width="100" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Eraser">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="eraserPressed:" destination="-1" eventType="touchUpInside" id="MW3-CY-c2Z"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKB-Wj-Fgs" userLabel="Button - Reset Drawing">
+                            <rect key="frame" x="320" y="468" width="100" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Reset">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="reset:" destination="-1" eventType="touchUpInside" id="d22-NX-7ie"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IO-ZP-ihm" userLabel="Button - Save Drawing">
+                            <rect key="frame" x="220" y="468" width="100" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Save">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="saveDrawingButton:" destination="-1" eventType="touchUpInside" id="g1b-Xh-r24"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNQ-uW-6om" userLabel="Button - Draw">
+                            <rect key="frame" x="20" y="468" width="100" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="Pencil">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="blackPencilPressed:" destination="-1" eventType="touchUpInside" id="IVG-HI-acg"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="10b-pN-yUA" userLabel="View - Drawing">
+                    <rect key="frame" x="0.0" y="20" width="575" height="748"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="soccerField2" translatesAutoresizingMaskIntoConstraints="NO" id="syS-wp-bPT" userLabel="backgroundFieldImage">
+                            <rect key="frame" x="0.0" y="0.0" width="575" height="748"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                            </accessibility>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="soccerField2" translatesAutoresizingMaskIntoConstraints="NO" id="6on-8g-S60" userLabel="mainImage">
+                            <rect key="frame" x="0.0" y="0.0" width="575" height="748"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="soccerField2" translatesAutoresizingMaskIntoConstraints="NO" id="YxB-mM-9O8" userLabel="tempDrawImage">
+                            <rect key="frame" x="0.0" y="0.0" width="575" height="748"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxO-Md-gua" userLabel="Player0View">
                     <rect key="frame" x="43" y="142" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zuu-UH-YGY" userLabel="Button - Player0">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zuu-UH-YGY" userLabel="Button - Player0">
                             <rect key="frame" x="10" y="20" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
@@ -367,7 +438,7 @@
                     <rect key="frame" x="237" y="164" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3q-93-kJ6" userLabel="Button - Player1">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3q-93-kJ6" userLabel="Button - Player1">
                             <rect key="frame" x="10" y="11" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
@@ -388,7 +459,7 @@
                     <rect key="frame" x="423" y="142" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ1-oU-g3v" userLabel="Button - Player2">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ1-oU-g3v" userLabel="Button - Player2">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -409,7 +480,7 @@
                     <rect key="frame" x="76" y="294" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgl-RB-XAc" userLabel="Button - Player3">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgl-RB-XAc" userLabel="Button - Player3">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -430,7 +501,7 @@
                     <rect key="frame" x="237" y="668" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mjz-Fe-ht8" userLabel="Button - Player10">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mjz-Fe-ht8" userLabel="Button - Player10">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -451,7 +522,7 @@
                     <rect key="frame" x="423" y="294" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdW-7k-XYf" userLabel="Button - Player4">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdW-7k-XYf" userLabel="Button - Player4">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -472,7 +543,7 @@
                     <rect key="frame" x="237" y="250" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c4-u2-NWW" userLabel="Button - Player5">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c4-u2-NWW" userLabel="Button - Player5">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -493,7 +564,7 @@
                     <rect key="frame" x="237" y="358" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKO-it-mHX" userLabel="Button - Player6">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKO-it-mHX" userLabel="Button - Player6">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -514,7 +585,7 @@
                     <rect key="frame" x="43" y="494" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mN-YX-RY4" userLabel="Button - Player7">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mN-YX-RY4" userLabel="Button - Player7">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -535,7 +606,7 @@
                     <rect key="frame" x="234" y="494" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1k-Ar-OxW" userLabel="Button - Player8">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1k-Ar-OxW" userLabel="Button - Player8">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -556,7 +627,7 @@
                     <rect key="frame" x="423" y="494" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwW-Jl-zqL" userLabel="Button - Player9">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwW-Jl-zqL" userLabel="Button - Player9">
                             <rect key="frame" x="10" y="15" width="80" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
