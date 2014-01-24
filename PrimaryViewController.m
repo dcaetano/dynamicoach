@@ -7,9 +7,9 @@
 //
 //******************************************************************
 // BUG NOTES / TO-DO LIST:
+//
 // Priority 1
 // - Need a better eraser that doesn't erase the field background
-// - Missing "Stop" functionality in "Stopwatch"
 // - Missing "Edit" player from roster
 //
 // Priority 2
@@ -18,6 +18,7 @@
 // - When saving the image, needs to include players as well!
 // - "Undo" button drawing
 // - Press/hold to drag and position
+// - Make sure stopwatch functionality works well
 //
 // Priority UI
 // - Update UI as a whole
@@ -86,7 +87,7 @@
         {
             char *errMsg;
             const char *sql_stmt =
-            "CREATE TABLE IF NOT EXISTS PLAYERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, ADDRESS TEXT, PHONE TEXT, EMAIL TEXT)";
+            "CREATE TABLE IF NOT EXISTS PLAYERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT, LASTNAME TEXT, PHONE TEXT, EMAIL TEXT)";
             
             if (sqlite3_exec(_playerDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
             {
@@ -167,7 +168,7 @@
         {
             
             NSString *insertSQL = [NSString stringWithFormat:
-                                   @"INSERT INTO PLAYERS (name, address, phone, email) VALUES (\"%@\", \"%@\", \"%@\", \"%@\")",
+                                   @"INSERT INTO PLAYERS (firstName, lastName, phone, email) VALUES (\"%@\", \"%@\", \"%@\", \"%@\")",
                                    firstNameStr, lastNameStr, phoneNumberStr, emailAddressStr];
             
             const char *insert_stmt = [insertSQL UTF8String];
@@ -286,6 +287,31 @@
     else if (buttonIndex == 1)
     {
         NSLog(@"Do nothing.");
+    }
+}
+
+-(void) deletePlayerFromRoster:(NSString*)playerStr {
+    
+    sqlite3_stmt    *statement;
+    const char *dbpath = [_databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
+    {
+        NSString *insertSQL = [NSString stringWithFormat:
+                               @"DELETE from PLAYERS WHERE lastName='%@'", playerStr];
+        
+        NSLog(@"insertSQL: %@", insertSQL);
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(_playerDB, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            [self repopulatePlayerList];
+            [rosterTable reloadData];
+        } else {
+            NSLog(@"Unable to delete player from roster, try again!");
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(_playerDB);
     }
 }
 
@@ -456,7 +482,7 @@
     if([playerList_lastName count])
         selectedPlayer = [playerList_lastName objectAtIndex:row];
     else
-        selectedPlayer = @"";
+        selectedPlayer = @"Set Player";
     
     NSLog(@"selectedPlayer = %@", selectedPlayer);
 }
@@ -585,6 +611,37 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [playerList_lastName count];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        NSString *playerToRemove = [playerList_lastName objectAtIndex:indexPath.row];
+        [self deletePlayerFromRoster:playerToRemove];
+        /*
+        sqlite3 *database;
+        if(sqlite3_open([_databasePath UTF8String], &database) == SQLITE_OK) {
+            NSString *sqlStatement = [NSString stringWithFormat:@"delete from players where lastName = %@",playerToRemove];
+            NSLog(@"Statement is: %@", sqlStatement);
+            sqlite3_stmt *compiledStatement;
+            NSLog(@"Statement");
+            if(sqlite3_prepare_v2(database, [sqlStatement UTF8String], -1, &compiledStatement, NULL) == SQLITE_OK){
+            }
+            NSLog(@"Deleting");
+            sqlite3_finalize(compiledStatement);
+            NSLog(@"Deleted");
+        }
+        sqlite3_close(database);
+        */
+        [self repopulatePlayerList];
+        [rosterTable reloadData];
+    }
 }
 
 //******************************************************************
