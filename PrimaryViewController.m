@@ -58,7 +58,6 @@
     selectedPlayer = @"";
     running = NO;
     stopWatchTimer = [[NSTimer alloc] init];
-    self.startDate = [NSDate date];
     
     [self toggleDrawingEnabled];
     [self toggleSubstitutionButtons];
@@ -394,6 +393,7 @@
 
 - (IBAction)startStopwatchPressed:(id)sender {
     if(!running){
+        self.startDate = [NSDate date];
         running = TRUE;
         [sender setTitle:@"Stop" forState:UIControlStateNormal];
         if (stopWatchTimer == nil) {
@@ -414,7 +414,6 @@
 - (IBAction)stopStopwatchPressed:(id)sender {
     [stopWatchTimer invalidate];
     stopWatchTimer = nil;
-    self.startDate = [NSDate date];
     stopWatchTimerLabel.text = @"0:00:00:00";
     running = FALSE;
 }
