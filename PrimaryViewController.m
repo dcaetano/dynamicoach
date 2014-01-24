@@ -86,7 +86,7 @@
         {
             char *errMsg;
             const char *sql_stmt =
-            "CREATE TABLE IF NOT EXISTS PLAYERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT, LASTNAME TEXT, PHONE TEXT, EMAIL TEXT)";
+            "CREATE TABLE IF NOT EXISTS PLAYERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT, LASTNAME TEXT, PHONE TEXT, EMAIL TEXT, NUMBER TEXT)";
             
             if (sqlite3_exec(_playerDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
             {
@@ -155,6 +155,7 @@
     NSLog(@"Last Name: %@", lastNameStr);
     NSLog(@"Phone Number: %@", phoneNumberStr);
     NSLog(@"Email Address: %@", emailAddressStr);
+    NSLog(@"Number: ##");
     
     BOOL success = NO;
     NSString *alertString = @"Data Insertion failed";
@@ -167,8 +168,8 @@
         {
             
             NSString *insertSQL = [NSString stringWithFormat:
-                                   @"INSERT INTO PLAYERS (firstName, lastName, phone, email) VALUES (\"%@\", \"%@\", \"%@\", \"%@\")",
-                                   firstNameStr, lastNameStr, phoneNumberStr, emailAddressStr];
+                                   @"INSERT INTO PLAYERS (firstName, lastName, phone, email, number) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")",
+                                   firstNameStr, lastNameStr, phoneNumberStr, emailAddressStr, @"##"];
             
             const char *insert_stmt = [insertSQL UTF8String];
             sqlite3_prepare_v2(_playerDB, insert_stmt, -1, &statement, NULL);
@@ -603,7 +604,6 @@
     
     NSString *player = [playerList_lastName objectAtIndex:rowCount];
     cell.textLabel.text = player;
-    //cell.detailTextLabel.text = author.title;
 
     return cell;
 }
@@ -620,24 +620,10 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
         //add code here for when you hit delete
         NSString *playerToRemove = [playerList_lastName objectAtIndex:indexPath.row];
         [self deletePlayerFromRoster:playerToRemove];
-        /*
-        sqlite3 *database;
-        if(sqlite3_open([_databasePath UTF8String], &database) == SQLITE_OK) {
-            NSString *sqlStatement = [NSString stringWithFormat:@"delete from players where lastName = %@",playerToRemove];
-            NSLog(@"Statement is: %@", sqlStatement);
-            sqlite3_stmt *compiledStatement;
-            NSLog(@"Statement");
-            if(sqlite3_prepare_v2(database, [sqlStatement UTF8String], -1, &compiledStatement, NULL) == SQLITE_OK){
-            }
-            NSLog(@"Deleting");
-            sqlite3_finalize(compiledStatement);
-            NSLog(@"Deleted");
-        }
-        sqlite3_close(database);
-        */
         [self repopulatePlayerList];
         [rosterTable reloadData];
     }

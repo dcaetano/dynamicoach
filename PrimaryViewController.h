@@ -95,7 +95,6 @@
 
 @property (strong, nonatomic) NSString *databasePath;
 @property (nonatomic) sqlite3 *playerDB;
-//@property (strong, nonatomic)  // Store the timer that fires after a certain time
 @property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
 @property (strong, nonatomic) IBOutlet UIPickerView *picker;
 

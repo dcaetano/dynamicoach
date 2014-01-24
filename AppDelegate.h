@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PrimaryViewController.h"
+#import "InitialSetupViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,6 +19,9 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (nonatomic, strong) PrimaryViewController *pvc;
+@property (nonatomic, strong) InitialSetupViewController *isvc;
+@property (strong, nonatomic) NSString *databasePath;
+@property (nonatomic) sqlite3 *playerDB;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
