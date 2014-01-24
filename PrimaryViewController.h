@@ -74,6 +74,7 @@
     //Stopwatch section
     IBOutlet UILabel *stopWatchTimerLabel;
     NSTimer *stopWatchTimer;
+    BOOL running;
     
     //Drawable section
     IBOutlet UIView *drawingView;

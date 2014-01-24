@@ -8,7 +8,6 @@
 //******************************************************************
 // BUG NOTES / TO-DO LIST:
 // Priority 1
-// - Clear roster
 // - Need a better eraser that doesn't erase the field background
 // - Missing "Stop" functionality in "Stopwatch"
 // - Missing "Edit" player from roster
@@ -56,13 +55,15 @@
     opacity = 1.0;
     
     selectedPlayer = @"";
+    running = NO;
+    stopWatchTimer = [[NSTimer alloc] init];
+    self.startDate = [NSDate date];
     
     [self toggleDrawingEnabled];
     [self toggleSubstitutionButtons];
     
     [super viewDidLoad];
     
-    stopWatchTimer = [[NSTimer alloc] init];
     
     NSString *docsDir;
     NSArray *dirPaths;
@@ -355,37 +356,41 @@
 
 - (void)updateTimer
 {
-    // Create date from the elapsed time
     NSDate *currentDate = [NSDate date];
     NSTimeInterval timeInterval = [currentDate timeIntervalSinceDate:self.startDate];
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    
-    // Create a date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"HH:mm:ss.SS"];
+    [dateFormatter setDateFormat:@"H:mm:ss:SS"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    
-    // Format the elapsed time and set it to the label
-    NSString *timeString = [dateFormatter stringFromDate:timerDate];
+    NSString *timeString=[dateFormatter stringFromDate:timerDate];
     stopWatchTimerLabel.text = timeString;
 }
 
 - (IBAction)startStopwatchPressed:(id)sender {
-    self.startDate = [NSDate date];
-    
-    // Create the stop watch timer that fires every 100 ms
-    stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
-                                                           target:self
-                                                         selector:@selector(updateTimer)
-                                                         userInfo:nil
-                                                          repeats:YES];
+    if(!running){
+        running = TRUE;
+        [sender setTitle:@"Stop" forState:UIControlStateNormal];
+        if (stopWatchTimer == nil) {
+            stopWatchTimer = [NSTimer scheduledTimerWithTimeInterval:1.0/10.0
+                                                         target:self
+                                                       selector:@selector(updateTimer)
+                                                       userInfo:nil
+                                                        repeats:YES];
+        }
+    }else{
+        running = FALSE;
+        [sender setTitle:@"Start" forState:UIControlStateNormal];
+        [stopWatchTimer invalidate];
+        stopWatchTimer = nil;
+    }
 }
 
 - (IBAction)stopStopwatchPressed:(id)sender {
     [stopWatchTimer invalidate];
     stopWatchTimer = nil;
-    stopWatchTimerLabel.text = @"00:00:00:00";
-    [self updateTimer];
+    self.startDate = [NSDate date];
+    stopWatchTimerLabel.text = @"0:00:00:00";
+    running = FALSE;
 }
 
 -(void) rosterView {
