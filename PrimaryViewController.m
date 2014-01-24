@@ -8,18 +8,17 @@
 //******************************************************************
 // BUG NOTES / TO-DO LIST:
 // Priority 1
-// - Substitution functionality
-//   > Active roster / bench and interchange between the two
-//   > Press/hold to drag and position
+// - Clear roster
 // - Need a better eraser that doesn't erase the field background
 // - Missing "Stop" functionality in "Stopwatch"
-// - Missing "Enable draw" button to toggle drawable
+// - Missing "Edit" player from roster
 //
 // Priority 2
 // - Missing RGB picker
 // - Missing brush size selector
 // - When saving the image, needs to include players as well!
 // - "Undo" button drawing
+// - Press/hold to drag and position
 //
 // Priority UI
 // - Update UI as a whole
@@ -55,6 +54,11 @@
     blue = 0.0/255.0;
     brush = 3.0;
     opacity = 1.0;
+    
+    selectedPlayer = @"";
+    
+    [self toggleDrawingEnabled];
+    [self toggleSubstitutionButtons];
     
     [super viewDidLoad];
     
@@ -232,7 +236,7 @@
     if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat:
-        @"SELECT address, phone FROM contacts WHERE lastName=\"%@\"", lastNameStr];
+        @"SELECT address, phone FROM players WHERE lastName=\"%@\"", lastNameStr];
             
         const char *query_stmt = [querySQL UTF8String];
             
@@ -261,49 +265,54 @@
 }
 
 -(IBAction)clearRosterButtonPressed:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:
-                          @"Are you sure you want to clear your roster?" message:nil
-                                                  delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView *alert = [[UIAlertView alloc] init];
+    [alert setTitle:@"WARNING"];
+    [alert setMessage:@"Are you sure you want to clear your roster? This is permanent and cannot be reversed."];
+    [alert setDelegate:self];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"No"];
     [alert show];
-    NSLog(@"clearRosterButtonPressed");
-    [self clearRoster];
-    [self repopulatePlayerList];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        // Yes, do something
+        [self clearRoster];
+        [self repopulatePlayerList];
+    }
+    else if (buttonIndex == 1)
+    {
+        NSLog(@"Do nothing.");
+    }
 }
 
 -(void) clearRoster {
-    NSLog(@"clearRoster");
+    
+    sqlite3_stmt    *statement;
     const char *dbpath = [_databasePath UTF8String];
-    sqlite3_stmt *statement;
-    NSString *status;
     
     if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
     {
-        NSString *querySQL = @"DELETE FROM players";
-        NSLog(@"%@", querySQL);
+        NSString *insertSQL = [NSString stringWithFormat:
+                               @"DELETE FROM PLAYERS"];
         
-        const char *query_stmt = [querySQL UTF8String];
-        
-        if (sqlite3_prepare_v2(_playerDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(_playerDB, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            status = @"SQLITE_OK";
-            //if (sqlite3_step(statement) == SQLITE_ROW)
-            //{
-            status = @"Player roster cleared.";
-            //} else {
-            //}
-            sqlite3_finalize(statement);
+            [self repopulatePlayerList];
+            [rosterTable reloadData];
+        } else {
+            NSLog(@"Unable to clear roster, try again!");
         }
-        else {
-            status = @"!SQLITE_OK";
-            status = @"Could not clear player roster.";
-        }
-        NSLog(@"%@", status);
+        sqlite3_finalize(statement);
         sqlite3_close(_playerDB);
     }
 }
 
-
--(NSMutableArray*)playerList{
+-(NSMutableArray*) playerList{
     NSMutableArray *list = [[NSMutableArray alloc] init];
     
     sqlite3_stmt *sqlStatement;
@@ -339,6 +348,7 @@
         sqlite3_finalize(sqlStatement);
         sqlite3_close(_playerDB);
         
+        NSLog(@"list successfully updated!");
         return list;
     }
 }
@@ -403,6 +413,149 @@
 //******************************************************************
 -(void) returnKeyboard {
     [self.view endEditing:YES];
+}
+
+//******************************************************************
+//Substitution Methods
+//******************************************************************
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    [self repopulatePlayerList];
+    
+    if([playerList_lastName count])
+        return [playerList_lastName count];
+    
+    return 1;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
+{
+    [self repopulatePlayerList];
+    
+    if([playerList_lastName count])
+        return [playerList_lastName objectAtIndex:row];
+    else
+        return @"Empty";
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
+    
+    NSLog(@"Selected Row %d", row);
+    
+    [self repopulatePlayerList];
+    
+    if([playerList_lastName count])
+        selectedPlayer = [playerList_lastName objectAtIndex:row];
+    else
+        selectedPlayer = @"";
+    
+    NSLog(@"selectedPlayer = %@", selectedPlayer);
+}
+
+-(void) benchModalWindow {
+    pressedOK = NO;
+    [self repopulatePlayerList];
+    [self.picker reloadAllComponents];
+    modalBenchView.hidden = NO;
+}
+
+-(IBAction)okModalBenchButtonPressed:(id)sender{
+    
+    NSString *substituteString = selectedPlayer;
+    
+    UIButton *pressedButton = (UIButton*)btnSender;
+    switch(pressedButton.tag)
+    {
+        case 1000: //Player 0
+            NSLog(@"Player 0 selected.");
+            [player0Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1001: //Player 1
+            NSLog(@"Player 1 selected.");
+            [player1Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1002: //Player 2
+            NSLog(@"Player 2 selected.");
+            [player2Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1003: //Player 3
+            NSLog(@"Player 3 selected.");
+            [player3Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1004: //Player 4
+            NSLog(@"Player 4 selected.");
+            [player4Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1005: //Player 5
+            NSLog(@"Player 5 selected.");
+            [player5Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1006: //Player 6
+            NSLog(@"Player 6 selected.");
+            [player6Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1007: //Player 7
+            NSLog(@"Player 7 selected.");
+            [player7Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1008: //Player 8
+            NSLog(@"Player 8 selected.");
+            [player8Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1009: //Player 9
+            NSLog(@"Player 9 selected.");
+            [player9Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+        case 1010: //Player 10
+            NSLog(@"Player 10 selected.");
+            [player10Button setTitle:substituteString forState:UIControlStateNormal];
+            break;
+    }
+    pressedOK = YES;
+    modalBenchView.hidden = YES;
+}
+
+-(NSString*) setSubstitutePlayer {
+    
+    return selectedPlayer;
+}
+
+-(IBAction)selectPlayerToSub:(id)sender {
+    btnSender = sender;
+    [self benchModalWindow];
+}
+
+-(void)toggleSubstitutionButtons {
+    if(!drawingView.hidden && !mainImage.hidden){
+        player0Button.enabled = NO;
+        player1Button.enabled = NO;
+        player2Button.enabled = NO;
+        player3Button.enabled = NO;
+        player4Button.enabled = NO;
+        player5Button.enabled = NO;
+        player6Button.enabled = NO;
+        player7Button.enabled = NO;
+        player8Button.enabled = NO;
+        player9Button.enabled = NO;
+        player10Button.enabled = NO;
+    }
+    else {
+        player0Button.enabled = YES;
+        player1Button.enabled = YES;
+        player2Button.enabled = YES;
+        player3Button.enabled = YES;
+        player4Button.enabled = YES;
+        player5Button.enabled = YES;
+        player6Button.enabled = YES;
+        player7Button.enabled = YES;
+        player8Button.enabled = YES;
+        player9Button.enabled = YES;
+        player10Button.enabled = YES;
+    }
 }
 
 //******************************************************************
@@ -487,8 +640,7 @@
 }
 
 - (IBAction)reset:(id)sender {
-    mainImage.image = nil;
-    [mainImage setImage:[UIImage imageNamed:@"soccerField2"]];
+    [self resetImage];
 }
 
 -(IBAction)saveDrawingButton:(id)sender {
@@ -499,17 +651,42 @@
     UIImageWriteToSavedPhotosAlbum(SaveImage, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
+-(void) resetImage {
+    mainImage.image = nil;
+    [mainImage setImage:[UIImage imageNamed:@"soccerField2"]];
+}
+
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     // Was there an error?
     if (error != NULL)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Image could not be saved.Please try again"  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Image could not be saved. Please try again."  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
         [alert show];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Image was successfully saved in photoalbum"  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:@"Image was successfully saved in photo album!"  delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Close", nil];
         [alert show];
     }
+}
+
+-(void) toggleDrawingEnabled {
+    if(!drawingView.hidden && !mainImage.hidden){
+        NSLog(@"Draw disabled.");
+        [self resetImage];
+        drawingView.hidden = YES;
+        mainImage.hidden = YES;
+    }
+    else {
+        NSLog(@"Draw enabled.");
+        drawingView.hidden = NO;
+        mainImage.hidden = NO;
+    }
+}
+
+-(IBAction)drawButtonPressed:(id)sender{
+    NSLog(@"Draw button pressed.");
+    [self toggleDrawingEnabled];
+    [self toggleSubstitutionButtons];
 }
 
 - (IBAction)eraserPressed:(id)sender {

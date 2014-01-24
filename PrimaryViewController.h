@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
 
-@interface PrimaryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
+@interface PrimaryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate> {
     
     NSString *firstNameStr, *lastNameStr, *phoneNumberStr, *emailAddressStr;
     NSString *regCount;
     NSMutableArray *playerList_lastName;
+    NSString *selectedPlayer;
+    BOOL pressedOK;
+    id btnSender;
     
     //Primary View Controller vars
     IBOutlet UIView *mainMenuView;
@@ -65,6 +68,9 @@
     IBOutlet UITextField *phoneNumber;
     IBOutlet UITextField *emailAddress;
     
+    IBOutlet UIView *modalBenchView;
+    IBOutlet UIButton *okModalBenchButton;
+    
     //Stopwatch section
     IBOutlet UILabel *stopWatchTimerLabel;
     NSTimer *stopWatchTimer;
@@ -83,12 +89,14 @@
     CGFloat brush;
     CGFloat opacity;
     BOOL mouseSwiped;
+    
 }
 
 @property (strong, nonatomic) NSString *databasePath;
 @property (nonatomic) sqlite3 *playerDB;
 //@property (strong, nonatomic)  // Store the timer that fires after a certain time
 @property (strong, nonatomic) NSDate *startDate; // Stores the date of the click on the start button
+@property (strong, nonatomic) IBOutlet UIPickerView *picker;
 
 -(IBAction)rosterBackButtonPressed:(id)sender;
 -(IBAction)formationBackButtonPressed:(id)sender;
@@ -101,5 +109,8 @@
 -(IBAction)eraserPressed:(id)sender;
 -(IBAction)blackPencilPressed:(id)sender;
 -(IBAction)saveDrawingButton:(id)sender;
+-(IBAction)selectPlayerToSub:(id)sender;
+-(IBAction)drawButtonPressed:(id)sender;
+-(IBAction)okModalBenchButtonPressed:(id)sender;
 
 @end
