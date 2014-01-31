@@ -40,22 +40,16 @@
 }
 
 -(IBAction)mainViewButtonPressed:(id)sender {
-    //mainView.hidden = YES;
     teamSetupView.hidden = NO;
     addPlayersView.hidden = YES;
 }
 
 -(IBAction)teamSetupButtonPressed:(id)sender{
-    //mainView.hidden = YES;
     teamSetupView.hidden = YES;
     addPlayersView.hidden = NO;
 }
 
 -(IBAction)addPlayersButtonPressed:(id)sender{
-    //mainView.hidden = YES;
-    teamSetupView.hidden = YES;
-    addPlayersView.hidden = YES;
-    
     [self loadPrimaryViewController];
     [self presentViewController:pvc animated:YES completion:NULL];
 }

@@ -18,6 +18,20 @@
     IBOutlet UIButton *mainViewButton;
     IBOutlet UIButton *teamSetupButton;
     IBOutlet UIButton *addPlayersButton;
+    
+    IBOutlet UITextField *teamName;
+    IBOutlet UIButton *blackColor;
+    IBOutlet UIButton *orangeColor;
+    IBOutlet UIButton *redColor;
+    IBOutlet UIButton *yellowColor;
+    IBOutlet UIButton *blueColor;
+    IBOutlet UIButton *greenColor;
+    IBOutlet UIButton *burgundyColor;
+    IBOutlet UIButton *purpleColor;
+    IBOutlet UIButton *pinkColor;
+    IBOutlet UIButton *whiteColor;
+    IBOutlet UIButton *selectCrest;
+    IBOutlet UIImageView *crestImage;
 }
 
 @property (nonatomic, strong) PrimaryViewController *pvc;
