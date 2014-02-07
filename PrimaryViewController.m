@@ -9,8 +9,7 @@
 // BUG NOTES / TO-DO LIST:
 //
 // Priority 1
-// - teamName
-// - Cache players on field
+// - Cache players on field*
 // - Need a better eraser that doesn't erase the field background
 // - Missing "Edit" player from roster
 //
@@ -20,14 +19,12 @@
 // - When saving the image, needs to include players as well!
 // - "Undo" button drawing
 // - Press/hold to drag and position
-// - Make sure stopwatch functionality works well
+// - Team Logo
 //
 // Priority UI
 // - Update UI as a whole
 //   > Color scheme
-//   > Font
 //   > Logos, loading page, app icon
-//   > Need icons
 //
 //******************************************************************
 
@@ -69,11 +66,6 @@
     
     [super viewDidLoad];
     
-    NSString *teamNameStr = [[NSUserDefaults standardUserDefaults]
-                             stringForKey:@"teamName"];
-    teamNameStr = [teamNameStr uppercaseString];
-    teamName.text = teamNameStr;
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"players.sqlite"];
@@ -92,6 +84,12 @@
     if([playerList_lastName count] == 0)
         [self repopulatePlayerList];
     
+    
+    [self getDefaultValues];
+    
+    //teamName.transform = CGAffineTransformMakeRotation((M_PI)/2);
+    //teamName2.transform = CGAffineTransformMakeRotation(-(M_PI)/2);
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -101,6 +99,39 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) getDefaultValues {
+    
+    NSString *teamNameStr = [[NSUserDefaults standardUserDefaults]
+                             stringForKey:@"teamName"];
+    teamNameStr = [teamNameStr uppercaseString];
+    teamName.text = teamNameStr;
+    teamName2.text = teamNameStr;
+    NSLog(@"Team Name: %@", teamNameStr);
+    
+    player0Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player0"];
+    player1Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player1"];
+    player2Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player2"];
+    player3Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player3"];
+    player4Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player4"];
+    player5Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player5"];
+    player6Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player6"];
+    player7Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player7"];
+    player8Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player8"];
+    player9Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                     stringForKey:@"player9"];
+    player10Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                      stringForKey:@"player10"];
+}
+
 -(void) setCustomFontForEverything {
     
     UIFont *nikeTotal90 = [UIFont fontWithName:@"NikeTotal90" size:27.0];
@@ -108,6 +139,7 @@
     
     stopWatchTimerLabel.font = nikeTotal90;
     teamName.font = nikeTotal90;
+    teamName2.font = nikeTotal90;
     
     rosterButton.titleLabel.font = nikeTotal90;
     rosterBackButton.titleLabel.font = nikeTotal90_18;
@@ -461,7 +493,11 @@
 
 -(void) benchModalWindow {
     pressedOK = NO;
-    selectedPlayer = [playerList_lastName objectAtIndex:0];
+    if([playerList_lastName count])
+        selectedPlayer = [playerList_lastName objectAtIndex:0];
+    else
+        selectedPlayer = @"SET PLAYER";
+    
     [self repopulatePlayerList];
     [self.picker reloadAllComponents];
     modalBenchView.hidden = NO;
@@ -477,46 +513,57 @@
         case 1000: //Player 0
             NSLog(@"Player 0 selected.");
             [player0Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player0"];
             break;
         case 1001: //Player 1
             NSLog(@"Player 1 selected.");
             [player1Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player1"];
             break;
         case 1002: //Player 2
             NSLog(@"Player 2 selected.");
             [player2Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player2"];
             break;
         case 1003: //Player 3
             NSLog(@"Player 3 selected.");
             [player3Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player3"];
             break;
         case 1004: //Player 4
             NSLog(@"Player 4 selected.");
             [player4Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player4"];
             break;
         case 1005: //Player 5
             NSLog(@"Player 5 selected.");
             [player5Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player5"];
             break;
         case 1006: //Player 6
             NSLog(@"Player 6 selected.");
             [player6Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player6"];
             break;
         case 1007: //Player 7
             NSLog(@"Player 7 selected.");
             [player7Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player7"];
             break;
         case 1008: //Player 8
             NSLog(@"Player 8 selected.");
             [player8Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player8"];
             break;
         case 1009: //Player 9
             NSLog(@"Player 9 selected.");
             [player9Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player9"];
             break;
         case 1010: //Player 10
             NSLog(@"Player 10 selected.");
             [player10Button setTitle:substituteString forState:UIControlStateNormal];
+            [[NSUserDefaults standardUserDefaults] setObject:substituteString forKey:@"player10"];
             break;
     }
     pressedOK = YES;

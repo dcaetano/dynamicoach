@@ -79,6 +79,7 @@
     IBOutlet UIButton *okModalBenchButton;
     
     IBOutlet UILabel *teamName;
+    IBOutlet UILabel *teamName2;
     IBOutlet UILabel *quickSubstitution;
     
     IBOutlet UILabel *firstNameLabel;
