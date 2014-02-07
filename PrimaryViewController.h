@@ -49,6 +49,7 @@
     IBOutlet UIButton *formationBackButton;
     IBOutlet UIButton *contactButton;
     IBOutlet UIButton *contactBackButton;
+    IBOutlet UIButton *settingsButton;
     
     IBOutlet UIButton *player0Button;
     IBOutlet UIButton *player1Button;

@@ -9,6 +9,8 @@
 // BUG NOTES / TO-DO LIST:
 //
 // Priority 1
+// - teamName
+// - Cache players on field
 // - Need a better eraser that doesn't erase the field background
 // - Missing "Edit" player from roster
 //
@@ -98,12 +100,6 @@
     
     UIFont *nikeTotal90 = [UIFont fontWithName:@"NikeTotal90" size:27.0];
     UIFont *nikeTotal90_18 = [UIFont fontWithName:@"NikeTotal90" size:18.0];
-    UIFont *nikeTotal90_12 = [UIFont fontWithName:@"NikeTotal90" size:12.0];
-    
-    firstName.font  = nikeTotal90;
-    lastName.font  = nikeTotal90;
-    emailAddress.font  = nikeTotal90;
-    phoneNumber.font  = nikeTotal90;
     
     stopWatchTimerLabel.font = nikeTotal90;
     teamName.font = nikeTotal90;
@@ -116,6 +112,7 @@
     addPlayerSubmitButton.titleLabel.font = nikeTotal90_18;
     addPlayerCancelButton.titleLabel.font = nikeTotal90_18;
     clearRosterButton.titleLabel.font = nikeTotal90_18;
+    settingsButton.titleLabel.font = nikeTotal90;
     
     quickSubstitution.font = nikeTotal90;
     okModalBenchButton.titleLabel.font = nikeTotal90;
@@ -124,17 +121,17 @@
     emailLabel.font = nikeTotal90;
     phoneNumberLabel.font = nikeTotal90;
     
-    player0Button.titleLabel.font = nikeTotal90_12;
-    player1Button.titleLabel.font = nikeTotal90_12;
-    player2Button.titleLabel.font = nikeTotal90_12;
-    player3Button.titleLabel.font = nikeTotal90_12;
-    player4Button.titleLabel.font = nikeTotal90_12;
-    player5Button.titleLabel.font = nikeTotal90_12;
-    player6Button.titleLabel.font = nikeTotal90_12;
-    player7Button.titleLabel.font = nikeTotal90_12;
-    player8Button.titleLabel.font = nikeTotal90_12;
-    player9Button.titleLabel.font = nikeTotal90_12;
-    player10Button.titleLabel.font = nikeTotal90_12;
+    player0Button.titleLabel.font = nikeTotal90_18;
+    player1Button.titleLabel.font = nikeTotal90_18;
+    player2Button.titleLabel.font = nikeTotal90_18;
+    player3Button.titleLabel.font = nikeTotal90_18;
+    player4Button.titleLabel.font = nikeTotal90_18;
+    player5Button.titleLabel.font = nikeTotal90_18;
+    player6Button.titleLabel.font = nikeTotal90_18;
+    player7Button.titleLabel.font = nikeTotal90_18;
+    player8Button.titleLabel.font = nikeTotal90_18;
+    player9Button.titleLabel.font = nikeTotal90_18;
+    player10Button.titleLabel.font = nikeTotal90_18;
 }
 
 -(IBAction)rosterButtonPressed:(id)sender {
@@ -171,6 +168,9 @@
     lastNameStr = lastName.text;
     phoneNumberStr = phoneNumber.text;
     emailAddressStr = emailAddress.text;
+    
+    firstNameStr = [firstNameStr uppercaseString];
+    lastNameStr = [lastNameStr uppercaseString];
     
     NSLog(@"Add Player");
     NSLog(@"First Name: %@", firstNameStr);
@@ -276,6 +276,18 @@
         NSLog(@"Roster deleted!");
     }
     [database close];
+    
+    [player0Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player1Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player2Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player3Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player4Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player5Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player6Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player7Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player8Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player9Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+    [player10Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
 }
 
 -(NSMutableArray*) playerList_LAST {
@@ -424,25 +436,27 @@
     if([playerList_lastName count])
         return [playerList_lastName objectAtIndex:row];
     else
-        return @"Empty";
+        return @"EMPTY";
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component{
     
     NSLog(@"Selected Row %d", row);
+    selectedPlayer = @"";
     
     [self repopulatePlayerList];
     
     if([playerList_lastName count])
         selectedPlayer = [playerList_lastName objectAtIndex:row];
     else
-        selectedPlayer = @"Set Player";
+        selectedPlayer = @"SET PLAYER";
     
     NSLog(@"selectedPlayer = %@", selectedPlayer);
 }
 
 -(void) benchModalWindow {
     pressedOK = NO;
+    selectedPlayer = [playerList_lastName objectAtIndex:0];
     [self repopulatePlayerList];
     [self.picker reloadAllComponents];
     modalBenchView.hidden = NO;

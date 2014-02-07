@@ -60,6 +60,7 @@
                 <outlet property="rosterButton" destination="1Qn-At-8oX" id="XYZ-uz-Axo"/>
                 <outlet property="rosterTable" destination="DYh-D0-kLN" id="nlw-IP-im1"/>
                 <outlet property="saveDrawingButton" destination="1IO-ZP-ihm" id="DZR-fa-PWF"/>
+                <outlet property="settingsButton" destination="Lhm-gT-dL6" id="z95-KV-XTV"/>
                 <outlet property="stopWatchTimerLabel" destination="AtD-6p-ofs" id="nJV-xa-oLA"/>
                 <outlet property="teamName" destination="QrM-FV-GEz" id="hRC-Dr-wJR"/>
                 <outlet property="tempDrawImage" destination="YxB-mM-9O8" id="b5b-pV-Bgi"/>
@@ -110,7 +111,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhm-gT-dL6" userLabel="Button - Settings">
-                            <rect key="frame" x="30" y="325" width="385" height="75"/>
+                            <rect key="frame" x="30" y="250" width="385" height="75"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                             <state key="normal" title="SETTINGS">
