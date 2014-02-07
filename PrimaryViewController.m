@@ -69,6 +69,11 @@
     
     [super viewDidLoad];
     
+    NSString *teamNameStr = [[NSUserDefaults standardUserDefaults]
+                             stringForKey:@"teamName"];
+    teamNameStr = [teamNameStr uppercaseString];
+    teamName.text = teamNameStr;
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"players.sqlite"];

@@ -11,6 +11,8 @@
 
 @interface InitialSetupViewController : UIViewController {
     
+    NSString *teamNameStr;
+    
     IBOutlet UIView *mainView;
     IBOutlet UIView *teamSetupView;
     IBOutlet UIView *addPlayersView;
@@ -20,16 +22,6 @@
     IBOutlet UIButton *addPlayersButton;
     
     IBOutlet UITextField *teamName;
-    IBOutlet UIButton *blackColor;
-    IBOutlet UIButton *orangeColor;
-    IBOutlet UIButton *redColor;
-    IBOutlet UIButton *yellowColor;
-    IBOutlet UIButton *blueColor;
-    IBOutlet UIButton *greenColor;
-    IBOutlet UIButton *burgundyColor;
-    IBOutlet UIButton *purpleColor;
-    IBOutlet UIButton *pinkColor;
-    IBOutlet UIButton *whiteColor;
     IBOutlet UIButton *selectCrest;
     IBOutlet UIImageView *crestImage;
 }

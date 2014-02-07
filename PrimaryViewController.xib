@@ -644,6 +644,10 @@
                     <color key="backgroundColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
+                <imageView userInteractionEnabled="NO" alpha="0.30000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blankShield-1" translatesAutoresizingMaskIntoConstraints="NO" id="3yb-Fd-UTD">
+                    <rect key="frame" x="195" y="306" width="190" height="240"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
@@ -652,6 +656,7 @@
     </objects>
     <resources>
         <image name="AppIcon_152_2x" width="152" height="152"/>
+        <image name="blankShield-1" width="725" height="800"/>
         <image name="pencil-icon-hi" width="426" height="595"/>
         <image name="play_icon_hi" width="102" height="100"/>
         <image name="reset-icon-hi" width="614" height="460"/>
