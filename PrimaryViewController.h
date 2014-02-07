@@ -8,15 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import <sqlite3.h>
+#import "FMDatabase.h"
 
 @interface PrimaryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIAlertViewDelegate> {
     
     NSString *firstNameStr, *lastNameStr, *phoneNumberStr, *emailAddressStr;
     NSString *regCount;
     NSMutableArray *playerList_lastName;
+    NSMutableArray *playerList_firstName;
+    NSMutableArray *playerList_email;
+    NSMutableArray *playerList_phoneNumber;
     NSString *selectedPlayer;
     BOOL pressedOK;
     id btnSender;
+    
+    FMDatabase *database;
     
     //Primary View Controller vars
     IBOutlet UIView *mainMenuView;
@@ -71,6 +77,15 @@
     IBOutlet UIView *modalBenchView;
     IBOutlet UIButton *okModalBenchButton;
     
+    IBOutlet UILabel *teamName;
+    IBOutlet UILabel *quickSubstitution;
+    
+    IBOutlet UILabel *firstNameLabel;
+    IBOutlet UILabel *lastNameLabel;
+    IBOutlet UILabel *phoneNumberLabel;
+    IBOutlet UILabel *emailLabel;
+    IBOutlet UILabel *addPlayerLabel;
+    
     //Stopwatch section
     IBOutlet UILabel *stopWatchTimerLabel;
     NSTimer *stopWatchTimer;
@@ -83,6 +98,7 @@
     IBOutlet UIButton *eraserButton;
     IBOutlet UIButton *saveDrawingButton;
     IBOutlet UIButton *resetDrawingButton;
+    IBOutlet UIButton *pencilDrawingButton;
     CGPoint lastPoint;
     CGFloat red;
     CGFloat green;

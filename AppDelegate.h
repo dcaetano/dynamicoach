@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PrimaryViewController.h"
 #import "InitialSetupViewController.h"
+#import "FMDatabase.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) InitialSetupViewController *isvc;
 @property (strong, nonatomic) NSString *databasePath;
 @property (nonatomic) sqlite3 *playerDB;
+@property (nonatomic) FMDatabase *database;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

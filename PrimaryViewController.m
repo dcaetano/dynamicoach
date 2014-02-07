@@ -9,6 +9,7 @@
 // BUG NOTES / TO-DO LIST:
 //
 // Priority 1
+// - Fix "Delete" player, swipy 
 // - Need a better eraser that doesn't erase the field background
 // - Missing "Edit" player from roster
 //
@@ -22,7 +23,6 @@
 //
 // Priority UI
 // - Update UI as a whole
-//   > TableViewCell
 //   > Color scheme
 //   > Font
 //   > Logos, loading page, app icon
@@ -31,6 +31,8 @@
 //******************************************************************
 
 #import "PrimaryViewController.h"
+#import "RosterTableCell.h"
+#import "FMDatabase.h"
 
 @interface PrimaryViewController ()
 
@@ -55,6 +57,8 @@
     brush = 3.0;
     opacity = 1.0;
     
+    [self setCustomFontForEverything];
+    
     selectedPlayer = @"";
     running = NO;
     stopWatchTimer = [[NSTimer alloc] init];
@@ -64,44 +68,20 @@
     
     [super viewDidLoad];
     
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"players.sqlite"];
     
-    NSString *docsDir;
-    NSArray *dirPaths;
+    database = [FMDatabase databaseWithPath:path];
     
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = dirPaths[0];
-    
-    // Build the path to the database file
-    _databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"players.db"]];
-    
-    NSFileManager *filemgr = [NSFileManager defaultManager];
-    
-    if ([filemgr fileExistsAtPath: _databasePath ] == NO)
-    {
-        const char *dbpath = [_databasePath UTF8String];
-        
-        if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
-        {
-            char *errMsg;
-            const char *sql_stmt =
-            "CREATE TABLE IF NOT EXISTS PLAYERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT, LASTNAME TEXT, PHONE TEXT, EMAIL TEXT, NUMBER TEXT)";
-            
-            if (sqlite3_exec(_playerDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
-            {
-                NSLog(@"Failed to create table.");
-            }
-            sqlite3_close(_playerDB);
-        } else {
-            //_status.text = @"Failed to open/create database";
-            NSLog(@"Failed to open/create database.");
-        }
-    }
-    
+    [database open];
+    [database executeUpdate:@"create table if not exists roster(id int primary key, firstname text, lastname text, email text, phone text, jersey text)"];
     
     //popuate Player List from DB
     playerList_lastName = [[NSMutableArray alloc] init];
+    playerList_firstName = [[NSMutableArray alloc] init];
+    playerList_email = [[NSMutableArray alloc] init];
+    playerList_phoneNumber = [[NSMutableArray alloc] init];
     
     if([playerList_lastName count] == 0)
         [self repopulatePlayerList];
@@ -113,6 +93,49 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) setCustomFontForEverything {
+    
+    UIFont *nikeTotal90 = [UIFont fontWithName:@"NikeTotal90" size:27.0];
+    UIFont *nikeTotal90_18 = [UIFont fontWithName:@"NikeTotal90" size:18.0];
+    UIFont *nikeTotal90_12 = [UIFont fontWithName:@"NikeTotal90" size:12.0];
+    
+    firstName.font  = nikeTotal90;
+    lastName.font  = nikeTotal90;
+    emailAddress.font  = nikeTotal90;
+    phoneNumber.font  = nikeTotal90;
+    
+    stopWatchTimerLabel.font = nikeTotal90;
+    teamName.font = nikeTotal90;
+    
+    rosterButton.titleLabel.font = nikeTotal90;
+    rosterBackButton.titleLabel.font = nikeTotal90_18;
+    formationButton.titleLabel.font = nikeTotal90;
+    formationBackButton.titleLabel.font = nikeTotal90_18;
+    addPlayerButton.titleLabel.font = nikeTotal90_18;
+    addPlayerSubmitButton.titleLabel.font = nikeTotal90_18;
+    addPlayerCancelButton.titleLabel.font = nikeTotal90_18;
+    clearRosterButton.titleLabel.font = nikeTotal90_18;
+    
+    quickSubstitution.font = nikeTotal90;
+    okModalBenchButton.titleLabel.font = nikeTotal90;
+    firstNameLabel.font = nikeTotal90;
+    lastNameLabel.font = nikeTotal90;
+    emailLabel.font = nikeTotal90;
+    phoneNumberLabel.font = nikeTotal90;
+    
+    player0Button.titleLabel.font = nikeTotal90_12;
+    player1Button.titleLabel.font = nikeTotal90_12;
+    player2Button.titleLabel.font = nikeTotal90_12;
+    player3Button.titleLabel.font = nikeTotal90_12;
+    player4Button.titleLabel.font = nikeTotal90_12;
+    player5Button.titleLabel.font = nikeTotal90_12;
+    player6Button.titleLabel.font = nikeTotal90_12;
+    player7Button.titleLabel.font = nikeTotal90_12;
+    player8Button.titleLabel.font = nikeTotal90_12;
+    player9Button.titleLabel.font = nikeTotal90_12;
+    player10Button.titleLabel.font = nikeTotal90_12;
 }
 
 -(IBAction)rosterButtonPressed:(id)sender {
@@ -161,34 +184,17 @@
     NSString *alertString = @"Data Insertion failed";
     if (firstNameStr.length>0 && lastNameStr.length>0 &&phoneNumberStr.length>0 && emailAddressStr.length>0)
     {
-        sqlite3_stmt    *statement;
-        const char *dbpath = [_databasePath UTF8String];
-        
-        if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
-        {
-            
-            NSString *insertSQL = [NSString stringWithFormat:
-                                   @"INSERT INTO PLAYERS (firstName, lastName, phone, email, number) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")",
-                                   firstNameStr, lastNameStr, phoneNumberStr, emailAddressStr, @"##"];
-            
-            const char *insert_stmt = [insertSQL UTF8String];
-            sqlite3_prepare_v2(_playerDB, insert_stmt, -1, &statement, NULL);
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
-                NSLog(@"Player added.");
-                success = YES;
-                firstName.text = @"";
-                lastName.text = @"";
-                emailAddress.text = @"";
-                phoneNumber.text = @"";
-            } else {
-                //_status.text = @"Failed to add contact";
-                NSLog(@"Failed to add contact.");
-                alertString = @"Failed to add contact.";
-            }
-            sqlite3_finalize(statement);
-            sqlite3_close(_playerDB);
-        }
+        [database open];
+        // Let fmdb do the work
+        [database executeUpdate:@"insert into roster(firstname, lastname, email, phone, jersey) values(?,?,?,?,?)",
+        firstNameStr, lastNameStr, emailAddressStr, phoneNumberStr, @"##",nil];
+        [database close];
+    
+        success = YES;
+        firstName.text = @"";
+        lastName.text = @"";
+        emailAddress.text = @"";
+        phoneNumber.text = @"";
     }
     else{
         alertString = @"Enter all fields!";
@@ -200,8 +206,7 @@
         [alert show];
     }
     else {
-        playerList_lastName = [self playerList];
-        [rosterTable reloadData];
+        [self repopulatePlayerList];
         [self.view endEditing:YES];
         addPlayerView.hidden = YES;
     }
@@ -214,8 +219,10 @@
 }
 
 -(void) repopulatePlayerList {
-    playerList_lastName = [self playerList];
-    NSLog(@"playerList: %@", playerList_lastName);
+    playerList_lastName = [self playerList_LAST];
+    playerList_firstName = [self playerList_FIRST];
+    playerList_phoneNumber = [self playerList_PHONE];
+    playerList_email = [self playerList_EMAIL];
     [rosterTable reloadData];
 }
 
@@ -228,42 +235,6 @@
     
     addPlayerView.hidden = YES;
     [self.view endEditing:YES];
-}
-
--(void) findPlayer {
-    const char *dbpath = [_databasePath UTF8String];
-    sqlite3_stmt    *statement;
-    NSString *status;
-    
-    if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
-    {
-        NSString *querySQL = [NSString stringWithFormat:
-        @"SELECT address, phone FROM players WHERE lastName=\"%@\"", lastNameStr];
-            
-        const char *query_stmt = [querySQL UTF8String];
-            
-        if (sqlite3_prepare_v2(_playerDB, query_stmt, -1, &statement, NULL) == SQLITE_OK)
-        {
-            if (sqlite3_step(statement) == SQLITE_ROW)
-            {
-                NSString *emailAddressField = [[NSString alloc]
-                                            initWithUTF8String:
-                                            (const char *) sqlite3_column_text(statement, 0)];
-                emailAddressStr = emailAddressField;
-                NSString *phoneField = [[NSString alloc]
-                                        initWithUTF8String:(const char *)
-                                        sqlite3_column_text(statement, 1)];
-                phoneNumberStr = phoneField;
-                status = @"Match found";
-            } else {
-                status = @"Match not found";
-                emailAddressStr = @"";
-                phoneNumberStr = @"";
-            }
-            sqlite3_finalize(statement);
-        }
-        sqlite3_close(_playerDB);
-    }
 }
 
 -(IBAction)clearRosterButtonPressed:(id)sender{
@@ -291,93 +262,78 @@
 }
 
 -(void) deletePlayerFromRoster:(NSString*)playerStr {
-    
-    sqlite3_stmt    *statement;
-    const char *dbpath = [_databasePath UTF8String];
-    
-    if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
-    {
-        NSString *insertSQL = [NSString stringWithFormat:
-                               @"DELETE from PLAYERS WHERE lastName='%@'", playerStr];
-        
-        NSLog(@"insertSQL: %@", insertSQL);
-        const char *insert_stmt = [insertSQL UTF8String];
-        sqlite3_prepare_v2(_playerDB, insert_stmt, -1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            [self repopulatePlayerList];
-            [rosterTable reloadData];
-        } else {
-            NSLog(@"Unable to delete player from roster, try again!");
-        }
-        sqlite3_finalize(statement);
-        sqlite3_close(_playerDB);
-    }
+    [database open];
+    [database beginTransaction];
+    [database executeQuery:@"delete from roster where lastname = ?", playerStr];
+    [database commit];
+    NSLog(@"Error %d: %@", [database lastErrorCode], [database lastErrorMessage]);
+    NSLog(@"User: %@ deleted!", playerStr);
+    [database close];
 }
 
 -(void) clearRoster {
-    
-    sqlite3_stmt    *statement;
-    const char *dbpath = [_databasePath UTF8String];
-    
-    if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
-    {
-        NSString *insertSQL = [NSString stringWithFormat:
-                               @"DELETE FROM PLAYERS"];
-        
-        const char *insert_stmt = [insertSQL UTF8String];
-        sqlite3_prepare_v2(_playerDB, insert_stmt, -1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            [self repopulatePlayerList];
-            [rosterTable reloadData];
-        } else {
-            NSLog(@"Unable to clear roster, try again!");
-        }
-        sqlite3_finalize(statement);
-        sqlite3_close(_playerDB);
+    [database open];
+    FMResultSet *results = [database executeQuery:@"delete from roster"];
+    while([results next]) {
+        NSLog(@"Roster deleted!");
     }
+    [database close];
 }
 
--(NSMutableArray*) playerList{
-    NSMutableArray *list = [[NSMutableArray alloc] init];
+-(NSMutableArray*) playerList_LAST {
     
-    sqlite3_stmt *sqlStatement;
-    @try {
-        NSFileManager *fileMgr = [NSFileManager defaultManager];
-        const char *dbpath = [_databasePath UTF8String];
-        BOOL success = [fileMgr fileExistsAtPath:_databasePath];
-        if(!success)
-        {
-            NSLog(@"Cannot locate database file '%s'.", dbpath);
-        }
-        if(!(sqlite3_open([_databasePath UTF8String], &_playerDB) == SQLITE_OK))
-        {
-            NSLog(@"An error has occured: %s", sqlite3_errmsg(_playerDB));
-            
-        }
-        
-        const char *sql = "SELECT * FROM players";
-        if(sqlite3_prepare(_playerDB, sql, -1, &sqlStatement, NULL) != SQLITE_OK)
-        {
-            NSLog(@"Problem with prepare statement:  %s", sqlite3_errmsg(_playerDB));
-        }else{
-            while (sqlite3_step(sqlStatement)==SQLITE_ROW) {
-                lastNameStr = [NSString stringWithUTF8String:(char *) sqlite3_column_text(sqlStatement, 2)];
-                [list addObject:lastNameStr];
-            }
-        }
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    [database open];
+    FMResultSet *results = [database executeQuery:@"select lastname from roster"];
+    while([results next]) {
+        lastNameStr = [results stringForColumn:@"lastname"];
+        [list addObject:lastNameStr];
     }
-    @catch (NSException *exception) {
-        NSLog(@"Problem with prepare statement:  %s", sqlite3_errmsg(_playerDB));
+    [database close];
+    
+    return list;
+}
+
+-(NSMutableArray*) playerList_FIRST {
+    
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    [database open];
+    FMResultSet *results = [database executeQuery:@"select firstname from roster"];
+    while([results next]) {
+        firstNameStr = [results stringForColumn:@"firstname"];
+        [list addObject:firstNameStr];
     }
-    @finally {
-        sqlite3_finalize(sqlStatement);
-        sqlite3_close(_playerDB);
-        
-        NSLog(@"list successfully updated!");
-        return list;
+    [database close];
+    
+    return list;
+}
+
+-(NSMutableArray*) playerList_EMAIL {
+    
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    [database open];
+    FMResultSet *results = [database executeQuery:@"select email from roster"];
+    while([results next]) {
+        emailAddressStr = [results stringForColumn:@"email"];
+        [list addObject:emailAddressStr];
     }
+    [database close];
+    
+    return list;
+}
+
+-(NSMutableArray*) playerList_PHONE {
+    
+    NSMutableArray *list = [[NSMutableArray alloc] init];
+    [database open];
+    FMResultSet *results = [database executeQuery:@"select phone from roster"];
+    while([results next]) {
+        phoneNumberStr = [results stringForColumn:@"phone"];
+        [list addObject:phoneNumberStr];
+    }
+    [database close];
+    
+    return list;
 }
 
 - (void)updateTimer
@@ -594,18 +550,33 @@
 //******************************************************************
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"PlayerCell";
+    static NSString *CellIdentifier = @"RosterTableCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RosterTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"RosterTableCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     int rowCount = indexPath.row;
     
-    NSString *player = [playerList_lastName objectAtIndex:rowCount];
-    cell.textLabel.text = player;
+    NSString *playerLastName = [playerList_lastName objectAtIndex:rowCount];
+    NSString *playerFirstName = [playerList_firstName objectAtIndex:rowCount];
+    NSString *playerPhoneNumber = [playerList_phoneNumber objectAtIndex:rowCount];
+    NSString *playerEmail = [playerList_email objectAtIndex:rowCount];
+
+    playerFirstName = [playerFirstName substringToIndex:1];
+    playerFirstName = [NSString stringWithFormat:@"%@.", playerFirstName];
+    
+    cell.firstNameLabel.text = playerFirstName;
+    cell.lastNameLabel.text = playerLastName;
+    cell.emailLabel.text = playerEmail;
+    cell.phoneLabel.text = playerPhoneNumber;
 
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -625,7 +596,6 @@
         NSString *playerToRemove = [playerList_lastName objectAtIndex:indexPath.row];
         [self deletePlayerFromRoster:playerToRemove];
         [self repopulatePlayerList];
-        [rosterTable reloadData];
     }
 }
 
@@ -717,21 +687,36 @@
 }
 
 -(void) toggleDrawingEnabled {
+    
+    [self resetImage];
+    
     if(!drawingView.hidden && !mainImage.hidden){
         NSLog(@"Draw disabled.");
-        [self resetImage];
         drawingView.hidden = YES;
         mainImage.hidden = YES;
+
+        [pencilDrawingButton setAlpha:0.40];
+        [saveDrawingButton setAlpha:0.40];
+        [resetDrawingButton setAlpha:0.40];
     }
     else {
         NSLog(@"Draw enabled.");
         drawingView.hidden = NO;
         mainImage.hidden = NO;
+        
+        [pencilDrawingButton setAlpha:1.0];
+        [saveDrawingButton setAlpha:1.0];
+        [resetDrawingButton setAlpha:1.0];
+        
+        red = 0.0/255.0;
+        green = 0.0/255.0;
+        blue = 0.0/255.0;
     }
 }
 
 -(IBAction)drawButtonPressed:(id)sender{
     NSLog(@"Draw button pressed.");
+    
     [self toggleDrawingEnabled];
     [self toggleSubstitutionButtons];
 }

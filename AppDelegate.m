@@ -15,6 +15,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 @synthesize pvc;
 @synthesize isvc;
+@synthesize database;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -22,20 +23,15 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    NSString *docsDir;
-    NSArray *dirPaths;
-    
-    // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    docsDir = dirPaths[0];
-    
-    // Build the path to the database file
-    _databasePath = [[NSString alloc] initWithString: [docsDir stringByAppendingPathComponent:@"players.db"]];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *docsPath = [paths objectAtIndex:0];
+    NSString *path = [docsPath stringByAppendingPathComponent:@"players.sqlite"];
     
     NSFileManager *filemgr = [NSFileManager defaultManager];
     
-    if ([filemgr fileExistsAtPath: _databasePath ] == NO)
+    database = [FMDatabase databaseWithPath:path];
+    
+    if ([filemgr fileExistsAtPath: path] == NO)
     {
         NSLog(@"loadInitialSetupViewController");
         [self loadInitialSetupViewController];
@@ -50,28 +46,9 @@
         [self.window makeKeyAndVisible];
     }
     
-    if ([filemgr fileExistsAtPath: _databasePath ] == NO)
-    {
-        const char *dbpath = [_databasePath UTF8String];
-        
-        if (sqlite3_open(dbpath, &_playerDB) == SQLITE_OK)
-        {
-            char *errMsg;
-            const char *sql_stmt =
-            "CREATE TABLE IF NOT EXISTS PLAYERS (ID INTEGER PRIMARY KEY AUTOINCREMENT, FIRSTNAME TEXT, LASTNAME TEXT, PHONE TEXT, EMAIL TEXT, NUMBER TEXT)";
-            
-            if (sqlite3_exec(_playerDB, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK)
-            {
-                NSLog(@"Failed to create table.");
-            }
-            else {
-                NSLog(@"Table successfully created.");
-            }
-            sqlite3_close(_playerDB);
-        } else {
-            NSLog(@"Failed to open/create database.");
-        }
-    }
+    [database open];
+    [database executeUpdate:@"create table if not exists roster(id int primary key, firstname text, lastname text, email text, phone text, jersey text)"];
+    
     return YES;
 }
 
