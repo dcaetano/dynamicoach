@@ -9,7 +9,6 @@
 // BUG NOTES / TO-DO LIST:
 //
 // Priority 1
-// - Fix "Delete" player, swipy 
 // - Need a better eraser that doesn't erase the field background
 // - Missing "Edit" player from roster
 //
@@ -251,7 +250,6 @@
 {
     if (buttonIndex == 0)
     {
-        // Yes, do something
         [self clearRoster];
         [self repopulatePlayerList];
     }
@@ -262,12 +260,12 @@
 }
 
 -(void) deletePlayerFromRoster:(NSString*)playerStr {
+    
     [database open];
-    [database beginTransaction];
-    [database executeQuery:@"delete from roster where lastname = ?", playerStr];
-    [database commit];
-    NSLog(@"Error %d: %@", [database lastErrorCode], [database lastErrorMessage]);
-    NSLog(@"User: %@ deleted!", playerStr);
+    FMResultSet *results = [database executeQuery:@"delete from roster where lastname = ?", playerStr];
+    while([results next]) {
+        NSLog(@"%@ deleted!", playerStr);
+    }
     [database close];
 }
 
@@ -591,12 +589,13 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
         //add code here for when you hit delete
         NSString *playerToRemove = [playerList_lastName objectAtIndex:indexPath.row];
         [self deletePlayerFromRoster:playerToRemove];
         [self repopulatePlayerList];
+        NSLog(@"playerList_lastName: %@", playerList_lastName);
     }
+    [rosterTable reloadData];
 }
 
 //******************************************************************
@@ -698,6 +697,8 @@
         [pencilDrawingButton setAlpha:0.40];
         [saveDrawingButton setAlpha:0.40];
         [resetDrawingButton setAlpha:0.40];
+        saveDrawingButton.enabled = NO;
+        resetDrawingButton.enabled = NO;
     }
     else {
         NSLog(@"Draw enabled.");
@@ -707,6 +708,9 @@
         [pencilDrawingButton setAlpha:1.0];
         [saveDrawingButton setAlpha:1.0];
         [resetDrawingButton setAlpha:1.0];
+        
+        saveDrawingButton.enabled = YES;
+        resetDrawingButton.enabled = YES;
         
         red = 0.0/255.0;
         green = 0.0/255.0;
