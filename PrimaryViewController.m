@@ -84,6 +84,13 @@
     if([playerList_lastName count] == 0)
         [self repopulatePlayerList];
     
+    if([[NSUserDefaults standardUserDefaults]
+        stringForKey:@"saveFormation"]) {
+    btnSender = [[NSUserDefaults standardUserDefaults]
+                                stringForKey:@"saveFormation"];
+    
+        [self choosePlayerFormation:btnSender];
+    }
     
     [self getDefaultValues];
     
@@ -911,7 +918,7 @@
             // Save as current default
             break;
         case 2005: //4-2-4
-            NSLog(@"4-3-3 selected.");
+            NSLog(@"4-2-4 selected.");
             // Forwards - 0,1,2,3
             player0View.frame = CGRectMake(111.0, 140.0, width, height);
             player1View.frame = CGRectMake(362.0, 140.0, width, height);
@@ -929,7 +936,181 @@
             player9View.frame = CGRectMake(427.0, 525.0, width, height);
             // Save as current default
             break;
+        case 2006: //4-5-1
+            NSLog(@"4-5-1 selected.");
+            // Forwards - 0
+            player0View.frame = CGRectMake(240.0, 190.0, width, height);
+            
+            //Midfielders - 1,2,3,4,5
+            player1View.frame = CGRectMake(43.0, 325.0, width, height);
+            player2View.frame = CGRectMake(240.0, 325.0, width, height);
+            player3View.frame = CGRectMake(427.0, 325.0, width, height);
+            player4View.frame = CGRectMake(131.0, 365.0, width, height);
+            player5View.frame = CGRectMake(342.0, 365.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2007: //4-2-3-1
+            NSLog(@"4-2-3-1 selected.");
+            // Forwards - 0
+            player0View.frame = CGRectMake(240.0, 160.0, width, height);
+            
+            //Midfielders (Split) - 1,2,3,4,5
+            player1View.frame = CGRectMake(43.0, 255.0, width, height);
+            player2View.frame = CGRectMake(240.0, 255.0, width, height);
+            player3View.frame = CGRectMake(427.0, 255.0, width, height);
+            
+            player4View.frame = CGRectMake(131.0, 415.0, width, height);
+            player5View.frame = CGRectMake(342.0, 415.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2008: //4-1-4-1
+            NSLog(@"4-1-4-1 selected.");
+            // Forwards - 0
+            player0View.frame = CGRectMake(240.0, 160.0, width, height);
+            
+            //Midfielders (Split) - 1,2,3,4,5
+            player1View.frame = CGRectMake(43.0, 255.0, width, height);
+            player2View.frame = CGRectMake(166.0, 255.0, width, height);
+            player3View.frame = CGRectMake(309.0, 255.0, width, height);
+            player4View.frame = CGRectMake(427.0, 255.0, width, height);
+            
+            player5View.frame = CGRectMake(240.0, 415.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2009: //4-4-1-1
+            NSLog(@"4-4-1-1 selected.");
+            // Forwards - 0,1
+            player0View.frame = CGRectMake(240.0, 160.0, width, height);
+            player1View.frame = CGRectMake(240.0, 255.0, width, height);
 
+            //Midfielders - 2,3,4,5
+            player2View.frame = CGRectMake(43.0, 415.0, width, height);
+            player3View.frame = CGRectMake(166.0, 415.0, width, height);
+            player4View.frame = CGRectMake(309.0, 415.0, width, height);
+            player5View.frame = CGRectMake(427.0, 415.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2010: //4-3-1-2
+            NSLog(@"4-3-1-2 selected.");
+            // Forwards - 0,1
+            player0View.frame = CGRectMake(166.0, 160.0, width, height);
+            player1View.frame = CGRectMake(309.0, 160.0, width, height);
+            
+            //Midfielders (Split) - 2,3,4,5
+            player2View.frame = CGRectMake(240.0, 255.0, width, height);
+            
+            player3View.frame = CGRectMake(131.0, 415.0, width, height);
+            player4View.frame = CGRectMake(240.0, 415.0, width, height);
+            player5View.frame = CGRectMake(342.0, 415.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2011: //4-2-2-2
+            NSLog(@"4-2-2-2 selected.");
+            // Forwards - 0,1
+            player0View.frame = CGRectMake(166.0, 160.0, width, height);
+            player1View.frame = CGRectMake(309.0, 160.0, width, height);
+            
+            //Midfielders (Split) - 2,3,4,5
+            player2View.frame = CGRectMake(166.0, 255.0, width, height);
+            player3View.frame = CGRectMake(309.0, 255.0, width, height);
+            
+            player4View.frame = CGRectMake(166.0, 415.0, width, height);
+            player5View.frame = CGRectMake(309.0, 415.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2012: //3-5-2
+            NSLog(@"3-5-2 selected.");
+            // Forwards - 0,1
+            player0View.frame = CGRectMake(166.0, 160.0, width, height);
+            player1View.frame = CGRectMake(309.0, 160.0, width, height);
+            
+            //Midfielders - 2,3,4,5,6
+            player2View.frame = CGRectMake(43.0, 325.0, width, height);
+            player3View.frame = CGRectMake(240.0, 325.0, width, height);
+            player4View.frame = CGRectMake(427.0, 325.0, width, height);
+            player5View.frame = CGRectMake(131.0, 365.0, width, height);
+            player6View.frame = CGRectMake(342.0, 365.0, width, height);
+            
+            //Defenders - 7,8,9
+            player7View.frame = CGRectMake(131.0, 525.0, width, height);
+            player8View.frame = CGRectMake(240.0, 525.0, width, height);
+            player9View.frame = CGRectMake(342.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2013: //3-6-1
+            NSLog(@"3-6-1 selected.");
+            // Forwards - 0
+            player0View.frame = CGRectMake(240.0, 160.0, width, height);
+            
+            //Midfielders - 1,2,3,4,5,6
+            player1View.frame = CGRectMake(131.0, 255.0, width, height);
+            player2View.frame = CGRectMake(240.0, 255.0, width, height);
+            player3View.frame = CGRectMake(342.0, 255.0, width, height);
+            player4View.frame = CGRectMake(131.0, 415.0, width, height);
+            player5View.frame = CGRectMake(240.0, 415.0, width, height);
+            player6View.frame = CGRectMake(342.0, 415.0, width, height);
+            
+            //Defenders - 7,8,9
+            player7View.frame = CGRectMake(131.0, 525.0, width, height);
+            player8View.frame = CGRectMake(240.0, 525.0, width, height);
+            player9View.frame = CGRectMake(342.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2014: //3-4-3
+            NSLog(@"3-4-3 selected.");
+            // Forwards - 0,1,2
+            player0View.frame = CGRectMake(131.0, 160.0, width, height);
+            player1View.frame = CGRectMake(240.0, 160.0, width, height);
+            player2View.frame = CGRectMake(342.0, 160.0, width, height);
+            
+            //Midfielders - 3,4,5,6
+            player3View.frame = CGRectMake(166.0, 255.0, width, height);
+            player4View.frame = CGRectMake(309.0, 255.0, width, height);
+            player5View.frame = CGRectMake(166.0, 415.0, width, height);
+            player6View.frame = CGRectMake(309.0, 415.0, width, height);
+            
+            //Defenders - 7,8,9
+            player7View.frame = CGRectMake(131.0, 525.0, width, height);
+            player8View.frame = CGRectMake(240.0, 525.0, width, height);
+            player9View.frame = CGRectMake(342.0, 525.0, width, height);
+            // Save as current default
+            break;
     }
 }
 
