@@ -125,6 +125,23 @@
     IBOutlet UILabel *settingsLabel;
     IBOutlet UILabel *settingsTeamNameLabel;
     IBOutlet UILabel *settingsBrushColorLabel;
+    
+    //Formations
+    IBOutlet UIButton *form2000;
+    IBOutlet UIButton *form2001;
+    IBOutlet UIButton *form2002;
+    IBOutlet UIButton *form2003;
+    IBOutlet UIButton *form2004;
+    IBOutlet UIButton *form2005;
+    IBOutlet UIButton *form2006;
+    IBOutlet UIButton *form2007;
+    IBOutlet UIButton *form2008;
+    IBOutlet UIButton *form2009;
+    IBOutlet UIButton *form2010;
+    IBOutlet UIButton *form2011;
+    IBOutlet UIButton *form2012;
+    IBOutlet UIButton *form2013;
+    IBOutlet UIButton *form2014;
 }
 
 @property (strong, nonatomic) NSString *databasePath;
@@ -141,7 +158,6 @@
 -(IBAction)clearRosterButtonPressed:(id)sender;
 -(IBAction)reset:(id)sender;
 -(IBAction)eraserPressed:(id)sender;
--(IBAction)blackPencilPressed:(id)sender;
 -(IBAction)saveDrawingButton:(id)sender;
 -(IBAction)selectPlayerToSub:(id)sender;
 -(IBAction)drawButtonPressed:(id)sender;

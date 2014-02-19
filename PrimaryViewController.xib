@@ -22,6 +22,21 @@
                 <outlet property="eraserButton" destination="Zqa-Vp-714" id="mkC-qG-Z49"/>
                 <outlet property="firstName" destination="x8D-H7-vU1" id="XiU-md-fhL"/>
                 <outlet property="firstNameLabel" destination="LA9-Ds-D0E" id="p27-To-dbn"/>
+                <outlet property="form2000" destination="ttk-e2-xkG" id="Cqz-3O-OkF"/>
+                <outlet property="form2001" destination="os6-We-rMA" id="ywV-Nc-YaQ"/>
+                <outlet property="form2002" destination="RRl-3r-4Fc" id="7lP-Ik-OGe"/>
+                <outlet property="form2003" destination="kgz-lM-xEN" id="1Ms-gN-bJ6"/>
+                <outlet property="form2004" destination="nhV-8n-aJX" id="bu1-oC-GXR"/>
+                <outlet property="form2005" destination="0Ua-jS-DVJ" id="75q-XZ-JHy"/>
+                <outlet property="form2006" destination="mzN-60-29v" id="8CS-Mg-7Jy"/>
+                <outlet property="form2007" destination="1Lb-De-BiU" id="GGS-8M-P90"/>
+                <outlet property="form2008" destination="2NL-O4-4ZR" id="4lA-z9-IfC"/>
+                <outlet property="form2009" destination="MWb-JX-mJP" id="eCN-BS-Hlu"/>
+                <outlet property="form2010" destination="XAf-Xm-BS9" id="1ao-DT-F6l"/>
+                <outlet property="form2011" destination="6DD-qO-L07" id="l3M-pi-rDm"/>
+                <outlet property="form2012" destination="FWB-Ie-Bvf" id="QKb-Ti-rk5"/>
+                <outlet property="form2013" destination="kuF-53-NYD" id="xtL-SO-1YE"/>
+                <outlet property="form2014" destination="PnX-ys-7g6" id="1aR-XI-8jM"/>
                 <outlet property="formationBackButton" destination="e1G-H6-h4q" id="CZa-WF-iM5"/>
                 <outlet property="formationButton" destination="chA-OI-fsC" id="HcN-mb-e6g"/>
                 <outlet property="formationView" destination="Zlc-5r-CKA" id="4xb-RJ-rly"/>
@@ -389,7 +404,7 @@
                                     <rect key="frame" x="35" y="40" width="100" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <state key="normal" title="4 - 4 - 2 Normal">
+                                    <state key="normal" title="4 - 4 - 2 NORMAL">
                                         <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -400,7 +415,7 @@
                                     <rect key="frame" x="175" y="40" width="100" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <state key="normal" title="4 - 4 - 2 Diamond">
+                                    <state key="normal" title="4 - 4 - 2 DIAMOND">
                                         <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -411,7 +426,7 @@
                                     <rect key="frame" x="315" y="40" width="100" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <state key="normal" title="4 - 4 - 2 Narrow">
+                                    <state key="normal" title="4 - 4 - 2 NARROW">
                                         <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -422,7 +437,7 @@
                                     <rect key="frame" x="35" y="110" width="100" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <state key="normal" title="4 - 4 - 2 Wide">
+                                    <state key="normal" title="4 - 4 - 2 WIDE">
                                         <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>

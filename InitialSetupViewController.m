@@ -54,6 +54,7 @@
     [self saveTeamCrest];
     
     [self loadPrimaryViewController];
+    mainView.hidden = YES;
     [self presentViewController:pvc animated:YES completion:NULL];
 }
 

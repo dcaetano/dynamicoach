@@ -408,12 +408,103 @@
     settingsSubmitButton.layer.borderWidth = 2;
     //settingsSubmitButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
     settingsSubmitButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2000 Button
+    form2000.layer.cornerRadius = 5;
+    form2000.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2000.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2001 Button
+    form2001.layer.cornerRadius = 5;
+    form2001.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2001.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2002 Button
+    form2002.layer.cornerRadius = 5;
+    form2002.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2002.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2003 Button
+    form2003.layer.cornerRadius = 5;
+    form2003.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2003.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2004 Button
+    form2004.layer.cornerRadius = 5;
+    form2004.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2004.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2005 Button
+    form2005.layer.cornerRadius = 5;
+    form2005.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2005.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2006 Button
+    form2006.layer.cornerRadius = 5;
+    form2006.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2006.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2007 Button
+    form2007.layer.cornerRadius = 5;
+    form2007.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2007.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2008 Button
+    form2008.layer.cornerRadius = 5;
+    form2008.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2008.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2009 Button
+    form2009.layer.cornerRadius = 5;
+    form2009.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2009.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2010 Button
+    form2010.layer.cornerRadius = 5;
+    form2010.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2010.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2011 Button
+    form2011.layer.cornerRadius = 5;
+    form2011.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2011.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2012 Button
+    form2012.layer.cornerRadius = 5;
+    form2012.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2012.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2013 Button
+    form2013.layer.cornerRadius = 5;
+    form2013.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2013.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation 2014 Button
+    form2014.layer.cornerRadius = 5;
+    form2014.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    form2014.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
 }
 
 -(void) setCustomFontForEverything {
     
     UIFont *nikeTotal90 = [UIFont fontWithName:@"NikeTotal90" size:27.0];
     UIFont *nikeTotal90_18 = [UIFont fontWithName:@"NikeTotal90" size:18.0];
+    UIFont *nikeTotal90_14 = [UIFont fontWithName:@"NikeTotal90" size:14.0];
     UIFont *nikeTotal90_42 = [UIFont fontWithName:@"NikeTotal90" size:42.0];
     
     stopWatchTimerLabel.font = nikeTotal90_42;
@@ -454,6 +545,22 @@
     settingsBrushColorLabel.font = nikeTotal90;
     settingsTeamNameLabel.font = nikeTotal90;
     settingsLabel.font = nikeTotal90;
+    
+    form2000.titleLabel.font = nikeTotal90_14;
+    form2001.titleLabel.font = nikeTotal90_14;
+    form2002.titleLabel.font = nikeTotal90_14;
+    form2003.titleLabel.font = nikeTotal90_14;
+    form2004.titleLabel.font = nikeTotal90_14;
+    form2005.titleLabel.font = nikeTotal90_14;
+    form2006.titleLabel.font = nikeTotal90_14;
+    form2007.titleLabel.font = nikeTotal90_14;
+    form2008.titleLabel.font = nikeTotal90_14;
+    form2009.titleLabel.font = nikeTotal90_14;
+    form2010.titleLabel.font = nikeTotal90_14;
+    form2011.titleLabel.font = nikeTotal90_14;
+    form2012.titleLabel.font = nikeTotal90_14;
+    form2013.titleLabel.font = nikeTotal90_14;
+    form2014.titleLabel.font = nikeTotal90_14;
 }
 
 -(IBAction)rosterButtonPressed:(id)sender {
