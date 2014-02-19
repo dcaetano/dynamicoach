@@ -829,8 +829,8 @@
             
             //Defenders - 6,7,8,9
             player6View.frame = CGRectMake(43.0, 525.0, width, height);
-            player7View.frame = CGRectMake(186.0, 525.0, width, height);
-            player8View.frame = CGRectMake(329.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
             player9View.frame = CGRectMake(427.0, 525.0, width, height);
             
             // Save as current default
@@ -849,8 +849,8 @@
             
             //Defenders - 6,7,8,9
             player6View.frame = CGRectMake(43.0, 525.0, width, height);
-            player7View.frame = CGRectMake(186.0, 525.0, width, height);
-            player8View.frame = CGRectMake(329.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
             player9View.frame = CGRectMake(427.0, 525.0, width, height);
             // Save as current default
             break;
@@ -868,8 +868,8 @@
             
             //Defenders - 6,7,8,9
             player6View.frame = CGRectMake(43.0, 525.0, width, height);
-            player7View.frame = CGRectMake(186.0, 525.0, width, height);
-            player8View.frame = CGRectMake(329.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
             player9View.frame = CGRectMake(427.0, 525.0, width, height);
             break;
         case 2003: //4-4-2 Diamond Wide
@@ -886,11 +886,50 @@
             
             //Defenders - 6,7,8,9
             player6View.frame = CGRectMake(43.0, 525.0, width, height);
-            player7View.frame = CGRectMake(186.0, 525.0, width, height);
-            player8View.frame = CGRectMake(329.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
             player9View.frame = CGRectMake(427.0, 525.0, width, height);
             // Save as current default
             break;
+        case 2004: //4-3-3
+            NSLog(@"4-3-3 selected.");
+            // Forwards - 0,1,2
+            player0View.frame = CGRectMake(43.0, 190.0, width, height);
+            player1View.frame = CGRectMake(240.0, 190.0, width, height);
+            player2View.frame = CGRectMake(427.0, 190.0, width, height);
+
+            //Midfielders - 3,4,5
+            player3View.frame = CGRectMake(43.0, 375.0, width, height);
+            player4View.frame = CGRectMake(240.0, 375.0, width, height);
+            player5View.frame = CGRectMake(427.0, 375.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+        case 2005: //4-2-4
+            NSLog(@"4-3-3 selected.");
+            // Forwards - 0,1,2,3
+            player0View.frame = CGRectMake(111.0, 140.0, width, height);
+            player1View.frame = CGRectMake(362.0, 140.0, width, height);
+            player2View.frame = CGRectMake(111.0, 225.0, width, height);
+            player3View.frame = CGRectMake(362.0, 225.0, width, height);
+            
+            //Midfielders - 4,5
+            player4View.frame = CGRectMake(111.0, 375.0, width, height);
+            player5View.frame = CGRectMake(362.0, 375.0, width, height);
+            
+            //Defenders - 6,7,8,9
+            player6View.frame = CGRectMake(43.0, 525.0, width, height);
+            player7View.frame = CGRectMake(166.0, 525.0, width, height);
+            player8View.frame = CGRectMake(309.0, 525.0, width, height);
+            player9View.frame = CGRectMake(427.0, 525.0, width, height);
+            // Save as current default
+            break;
+
     }
 }
 

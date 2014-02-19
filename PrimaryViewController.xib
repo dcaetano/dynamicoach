@@ -222,7 +222,7 @@
                                     <rect key="frame" x="35" y="20" width="100" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <state key="normal" title="4-4-2 Normal">
+                                    <state key="normal" title="4 - 4 - 2 Normal">
                                         <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -260,6 +260,50 @@
                                     </state>
                                     <connections>
                                         <action selector="choosePlayerFormation:" destination="-1" eventType="touchUpInside" id="kcv-Lv-l9Z"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2004" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhV-8n-aJX">
+                                    <rect key="frame" x="175" y="70" width="100" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="4 - 3 - 3">
+                                        <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="choosePlayerFormation:" destination="-1" eventType="touchUpInside" id="0Lz-Al-Oyp"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2005" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ua-jS-DVJ">
+                                    <rect key="frame" x="315" y="70" width="100" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="4 - 2 - 4">
+                                        <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="choosePlayerFormation:" destination="-1" eventType="touchUpInside" id="bNr-6G-3e9"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2006" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzN-60-29v">
+                                    <rect key="frame" x="35" y="120" width="100" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="4 - 5 - 1">
+                                        <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="choosePlayerFormation:" destination="-1" eventType="touchUpInside" id="00y-S4-wu3"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2007" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Lb-De-BiU">
+                                    <rect key="frame" x="175" y="237" width="100" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" title="4 - 2 - 3 - 1">
+                                        <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="choosePlayerFormation:" destination="-1" eventType="touchUpInside" id="2Ou-nY-U7I"/>
                                     </connections>
                                 </button>
                             </subviews>
