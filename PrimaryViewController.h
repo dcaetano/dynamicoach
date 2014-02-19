@@ -130,5 +130,6 @@
 -(IBAction)selectPlayerToSub:(id)sender;
 -(IBAction)drawButtonPressed:(id)sender;
 -(IBAction)okModalBenchButtonPressed:(id)sender;
+-(IBAction)choosePlayerFormation:(id)sender;
 
 @end
