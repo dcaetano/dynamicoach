@@ -99,10 +99,15 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     NSLog(@"viewDidAppear");
+    [self refreshUI];
+    [super viewDidAppear:NO];
+}
+
+-(void) refreshUI {
+    NSLog(@"Refresh UI");
     [self getDefaultValues];
     [self setCustomFontForEverything];
     [self prettyButtonsFTW];
-    [super viewDidAppear:NO];
 }
 
 -(void) getDefaultValues {
@@ -869,6 +874,8 @@
         player9Button.enabled = YES;
         player10Button.enabled = YES;
     }
+    
+    [self refreshUI];
 }
 
 //******************************************************************
