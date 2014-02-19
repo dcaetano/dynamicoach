@@ -93,6 +93,7 @@
     IBOutlet UILabel *stopWatchTimerLabel;
     NSTimer *stopWatchTimer;
     BOOL running;
+    IBOutlet UIView *gameTimerView;
     
     //Drawable section
     IBOutlet UIView *drawingView;
@@ -102,6 +103,7 @@
     IBOutlet UIButton *saveDrawingButton;
     IBOutlet UIButton *resetDrawingButton;
     IBOutlet UIButton *pencilDrawingButton;
+    IBOutlet UIView *drawer;
     CGPoint lastPoint;
     CGFloat red;
     CGFloat green;

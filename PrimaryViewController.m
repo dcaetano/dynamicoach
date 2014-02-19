@@ -31,6 +31,7 @@
 #import "PrimaryViewController.h"
 #import "RosterTableCell.h"
 #import "FMDatabase.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface PrimaryViewController ()
 
@@ -100,6 +101,7 @@
     NSLog(@"viewDidAppear");
     [self getDefaultValues];
     [self setCustomFontForEverything];
+    [self prettyButtonsFTW];
     [super viewDidAppear:NO];
 }
 
@@ -256,12 +258,148 @@
     NSLog(@"Player 10 - %@", playerLog);
 }
 
+-(void) prettyButtonsFTW {
+    
+    //Player 0 Button
+    player0Button.layer.cornerRadius = 3;
+    player0Button.layer.borderWidth = 2;
+    player0Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player0Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 1 Button
+    player1Button.layer.cornerRadius = 3;
+    player1Button.layer.borderWidth = 2;
+    player1Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player1Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 2 Button
+    player2Button.layer.cornerRadius = 3;
+    player2Button.layer.borderWidth = 2;
+    player2Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player2Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 3 Button
+    player3Button.layer.cornerRadius = 3;
+    player3Button.layer.borderWidth = 2;
+    player3Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player3Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 4 Button
+    player4Button.layer.cornerRadius = 3;
+    player4Button.layer.borderWidth = 2;
+    player4Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player4Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 5 Button
+    player5Button.layer.cornerRadius = 3;
+    player5Button.layer.borderWidth = 2;
+    player5Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player5Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 6 Button
+    player6Button.layer.cornerRadius = 3;
+    player6Button.layer.borderWidth = 2;
+    player6Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player6Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 7 Button
+    player7Button.layer.cornerRadius = 3;
+    player7Button.layer.borderWidth = 2;
+    player7Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player7Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 8 Button
+    player8Button.layer.cornerRadius = 3;
+    player8Button.layer.borderWidth = 2;
+    player8Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player8Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 9 Button
+    player9Button.layer.cornerRadius = 3;
+    player9Button.layer.borderWidth = 2;
+    player9Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player9Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Player 10 Button
+    player10Button.layer.cornerRadius = 3;
+    player10Button.layer.borderWidth = 2;
+    player10Button.layer.borderColor = [UIColor blackColor].CGColor;
+    player10Button.layer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    
+    //Roster Button
+    rosterButton.layer.cornerRadius = 5;
+    rosterButton.layer.borderWidth = 2;
+    //rosterButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    rosterButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation Button
+    formationButton.layer.cornerRadius = 5;
+    formationButton.layer.borderWidth = 2;
+    //formationButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    formationButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+
+    //Settings Button
+    settingsButton.layer.cornerRadius = 5;
+    settingsButton.layer.borderWidth = 2;
+    //settingsButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    settingsButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Drawer View
+    drawer.layer.cornerRadius = 5;
+    drawer.layer.borderWidth = 2;
+    //drawer.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    drawer.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Game Timer View
+    gameTimerView.layer.cornerRadius = 5;
+    gameTimerView.layer.borderWidth = 2;
+    //gameTimerView.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    gameTimerView.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Add Player Button
+    addPlayerButton.layer.cornerRadius = 5;
+    addPlayerButton.layer.borderWidth = 2;
+    //addPlayerButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    addPlayerButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Clear Roster Button
+    clearRosterButton.layer.cornerRadius = 5;
+    clearRosterButton.layer.borderWidth = 2;
+    //clearRosterButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    clearRosterButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Add Player Submit Button
+    addPlayerSubmitButton.layer.cornerRadius = 5;
+    addPlayerSubmitButton.layer.borderWidth = 2;
+    //addPlayerSubmitButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    addPlayerSubmitButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Add Player Cancel Button
+    addPlayerCancelButton.layer.cornerRadius = 5;
+    addPlayerCancelButton.layer.borderWidth = 2;
+    //addPlayerCancelButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    addPlayerCancelButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Formation Cancel Button
+    formationBackButton.layer.cornerRadius = 5;
+    formationBackButton.layer.borderWidth = 2;
+    //addPlayerCancelButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    formationBackButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Roster Back Button
+    rosterBackButton.layer.cornerRadius = 5;
+    rosterBackButton.layer.borderWidth = 2;
+    //rosterBackButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    rosterBackButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+}
+
 -(void) setCustomFontForEverything {
     
     UIFont *nikeTotal90 = [UIFont fontWithName:@"NikeTotal90" size:27.0];
     UIFont *nikeTotal90_18 = [UIFont fontWithName:@"NikeTotal90" size:18.0];
+    UIFont *nikeTotal90_42 = [UIFont fontWithName:@"NikeTotal90" size:42.0];
     
-    stopWatchTimerLabel.font = nikeTotal90;
+    stopWatchTimerLabel.font = nikeTotal90_42;
     teamName.font = nikeTotal90;
     teamName2.font = nikeTotal90;
     
@@ -850,11 +988,44 @@
 }
 
 -(IBAction)saveDrawingButton:(id)sender {
+    /*
     UIGraphicsBeginImageContextWithOptions(mainImage.bounds.size, NO,0.0);
     [mainImage.image drawInRect:CGRectMake(0, 0, mainImage.frame.size.width, mainImage.frame.size.height)];
     UIImage *SaveImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     UIImageWriteToSavedPhotosAlbum(SaveImage, self,@selector(image:didFinishSavingWithError:contextInfo:), nil);
+     */
+    
+    if(!player0View.hidden) {
+        
+        player0View.hidden = YES;
+        player1View.hidden = YES;
+        player2View.hidden = YES;
+        player3View.hidden = YES;
+        player4View.hidden = YES;
+        player5View.hidden = YES;
+        player6View.hidden = YES;
+        player7View.hidden = YES;
+        player8View.hidden = YES;
+        player9View.hidden = YES;
+        player10View.hidden = YES;
+        [saveDrawingButton setImage:[UIImage imageNamed:@"closed-eye-icon-hi"] forState:UIControlStateNormal];
+
+    }
+    else {
+        player0View.hidden = NO;
+        player1View.hidden = NO;
+        player2View.hidden = NO;
+        player3View.hidden = NO;
+        player4View.hidden = NO;
+        player5View.hidden = NO;
+        player6View.hidden = NO;
+        player7View.hidden = NO;
+        player8View.hidden = NO;
+        player9View.hidden = NO;
+        player10View.hidden = NO;
+        [saveDrawingButton setImage:[UIImage imageNamed:@"open-eye-icon-hi"] forState:UIControlStateNormal];
+    }
 }
 
 -(void) resetImage {

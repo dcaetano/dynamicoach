@@ -13,6 +13,7 @@
                 <outlet property="addPlayerView" destination="Tbr-2f-SE9" id="MSo-ln-mZO"/>
                 <outlet property="clearRosterButton" destination="s7G-iR-K8f" id="7iI-oz-qxo"/>
                 <outlet property="controllerView" destination="PXr-Qw-q0c" id="lZr-BP-9Sa"/>
+                <outlet property="drawer" destination="8bx-dt-Kvb" id="Xpu-to-OJI"/>
                 <outlet property="drawingView" destination="10b-pN-yUA" id="ivN-Cd-bbY"/>
                 <outlet property="emailAddress" destination="JqX-LD-zb5" id="KYV-6S-Pa7"/>
                 <outlet property="emailLabel" destination="vS3-oa-5tB" id="DVY-bR-2zf"/>
@@ -22,6 +23,7 @@
                 <outlet property="formationBackButton" destination="e1G-H6-h4q" id="CZa-WF-iM5"/>
                 <outlet property="formationButton" destination="chA-OI-fsC" id="HcN-mb-e6g"/>
                 <outlet property="formationView" destination="Zlc-5r-CKA" id="4xb-RJ-rly"/>
+                <outlet property="gameTimerView" destination="4De-t6-ZCx" id="mjb-m6-M3W"/>
                 <outlet property="lastName" destination="GQ4-fm-qXK" id="NPr-l5-ZeM"/>
                 <outlet property="lastNameLabel" destination="Mg4-St-PbX" id="70w-tb-hla"/>
                 <outlet property="mainImage" destination="6on-8g-S60" id="kea-Gy-HfT"/>
@@ -82,11 +84,11 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Qn-At-8oX">
-                            <rect key="frame" x="31" y="100" width="385" height="75"/>
+                            <rect key="frame" x="30" y="100" width="385" height="75"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                             <state key="normal" title="ROSTER">
-                                <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.0" green="0.85098046064376831" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -94,7 +96,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chA-OI-fsC">
-                            <rect key="frame" x="31" y="175" width="385" height="75"/>
+                            <rect key="frame" x="30" y="200" width="385" height="75"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                             <state key="normal" title="FORMATION">
@@ -106,7 +108,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhm-gT-dL6" userLabel="Button - Settings">
-                            <rect key="frame" x="30" y="250" width="385" height="75"/>
+                            <rect key="frame" x="30" y="300" width="385" height="75"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="20"/>
                             <state key="normal" title="SETTINGS">
@@ -118,18 +120,18 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4De-t6-ZCx" userLabel="GameTimer">
-                            <rect key="frame" x="16" y="572" width="300" height="70"/>
+                            <rect key="frame" x="16" y="537" width="414" height="85"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0:00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtD-6p-ofs">
-                                    <rect key="frame" x="68" y="0.0" width="168" height="70"/>
+                                    <rect key="frame" x="122" y="8" width="168" height="70"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZc-bI-s2q">
-                                    <rect key="frame" x="230" y="10" width="50" height="50"/>
+                                    <rect key="frame" x="320" y="3" width="80" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                     <state key="normal" title="Start" image="play_icon_hi">
@@ -141,7 +143,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2y-dn-QGY">
-                                    <rect key="frame" x="19" y="5" width="50" height="60"/>
+                                    <rect key="frame" x="19" y="3" width="70" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
                                     <state key="normal" title="Reset" image="stopwatch-md">
@@ -159,7 +161,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="450" height="523"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DYh-D0-kLN" userLabel="Roster Table View">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DYh-D0-kLN" userLabel="Roster Table View">
                                     <rect key="frame" x="35" y="20" width="380" height="410"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <connections>
@@ -168,7 +170,7 @@
                                     </connections>
                                 </tableView>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Pe-NP-rcY">
-                                    <rect key="frame" x="275" y="438" width="100" height="30"/>
+                                    <rect key="frame" x="290" y="438" width="100" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="ADD PLAYER">
@@ -190,7 +192,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6F7-cx-dId" userLabel="Button - Roster Back">
-                                    <rect key="frame" x="75" y="438" width="100" height="30"/>
+                                    <rect key="frame" x="60" y="438" width="100" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="BACK">
@@ -208,7 +210,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1G-H6-h4q" userLabel="Button - Formation Back">
-                                    <rect key="frame" x="35" y="438" width="185" height="30"/>
+                                    <rect key="frame" x="175" y="438" width="100" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="BACK">
@@ -490,44 +492,47 @@
                                 <action selector="eraserPressed:" destination="-1" eventType="touchUpInside" id="MW3-CY-c2Z"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKB-Wj-Fgs" userLabel="Button - Reset Drawing">
-                            <rect key="frame" x="224" y="648" width="100" height="80"/>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bx-dt-Kvb" userLabel="DrawViewer">
+                            <rect key="frame" x="16" y="630" width="414" height="85"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="Reset" image="reset-icon-hi">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="reset:" destination="-1" eventType="touchUpInside" id="d22-NX-7ie"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IO-ZP-ihm" userLabel="Button - Save Drawing">
-                            <rect key="frame" x="144" y="660" width="60" height="60"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="Save" image="save_icon_hi">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="saveDrawingButton:" destination="-1" eventType="touchUpInside" id="g1b-Xh-r24"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZy-lw-YC3" userLabel="Button - Draw">
-                            <rect key="frame" x="24" y="650" width="80" height="80"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="Draw" image="pencil-icon-hi">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="drawButtonPressed:" destination="-1" eventType="touchUpInside" id="Zd9-6m-yeu"/>
-                            </connections>
-                        </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="AppIcon_152_2x" translatesAutoresizingMaskIntoConstraints="NO" id="YPs-rH-eaK">
-                            <rect key="frame" x="328" y="587" width="110" height="110"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fZy-lw-YC3" userLabel="Button - Draw">
+                                    <rect key="frame" x="20" y="3" width="80" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="Draw" image="pencil-icon-hi">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="drawButtonPressed:" destination="-1" eventType="touchUpInside" id="Zd9-6m-yeu"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1IO-ZP-ihm" userLabel="Button - Save Drawing">
+                                    <rect key="frame" x="177" y="13" width="60" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="Save" image="open-eye-icon-hi">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveDrawingButton:" destination="-1" eventType="touchUpInside" id="g1b-Xh-r24"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KKB-Wj-Fgs" userLabel="Button - Reset Drawing">
+                                    <rect key="frame" x="314" y="3" width="100" height="80"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="Reset" image="reset-icon-hi">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="reset:" destination="-1" eventType="touchUpInside" id="d22-NX-7ie"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -552,6 +557,10 @@
                         </imageView>
                     </subviews>
                 </view>
+                <imageView userInteractionEnabled="NO" alpha="0.25000000000000006" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blankShield-1" translatesAutoresizingMaskIntoConstraints="NO" id="3yb-Fd-UTD">
+                    <rect key="frame" x="195" y="306" width="190" height="240"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xxO-Md-gua" userLabel="Player0View">
                     <rect key="frame" x="43" y="142" width="100" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -756,10 +765,6 @@
                     <color key="backgroundColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                 </view>
-                <imageView userInteractionEnabled="NO" alpha="0.25000000000000006" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="blankShield-1" translatesAutoresizingMaskIntoConstraints="NO" id="3yb-Fd-UTD">
-                    <rect key="frame" x="195" y="306" width="190" height="240"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.25" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEAM NAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="QrM-FV-GEz">
                     <rect key="frame" x="152" y="655" width="270" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -816,12 +821,11 @@
         </view>
     </objects>
     <resources>
-        <image name="AppIcon_152_2x" width="152" height="152"/>
         <image name="blankShield-1" width="725" height="800"/>
+        <image name="open-eye-icon-hi" width="512" height="512"/>
         <image name="pencil-icon-hi" width="426" height="595"/>
         <image name="play_icon_hi" width="102" height="100"/>
         <image name="reset-icon-hi" width="614" height="460"/>
-        <image name="save_icon_hi" width="512" height="512"/>
         <image name="soccerField2" width="1185" height="1448"/>
         <image name="stopwatch-md" width="249" height="300"/>
     </resources>
