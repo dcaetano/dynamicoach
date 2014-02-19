@@ -112,6 +112,19 @@
     CGFloat opacity;
     BOOL mouseSwiped;
     
+    //Settings
+    IBOutlet UITextField *teamNameSettings;
+    IBOutlet UIButton *blackPen;
+    IBOutlet UIButton *grayPen;
+    IBOutlet UIButton *redPen;
+    IBOutlet UIButton *bluePen;
+    IBOutlet UIButton *greenPen;
+    IBOutlet UIButton *settingsBackButton;
+    IBOutlet UIButton *settingsSubmitButton;
+    IBOutlet UIView *settingsView;
+    IBOutlet UILabel *settingsLabel;
+    IBOutlet UILabel *settingsTeamNameLabel;
+    IBOutlet UILabel *settingsBrushColorLabel;
 }
 
 @property (strong, nonatomic) NSString *databasePath;

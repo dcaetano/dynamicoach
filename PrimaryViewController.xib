@@ -11,6 +11,8 @@
                 <outlet property="addPlayerLabel" destination="p9U-Fm-nhy" id="rtt-9j-RQ9"/>
                 <outlet property="addPlayerSubmitButton" destination="lCo-XG-iJi" id="wou-I8-zn6"/>
                 <outlet property="addPlayerView" destination="Tbr-2f-SE9" id="MSo-ln-mZO"/>
+                <outlet property="blackPen" destination="WZC-vW-N8c" id="2g5-6J-cLD"/>
+                <outlet property="bluePen" destination="I2M-7R-YPR" id="YrT-n9-SVE"/>
                 <outlet property="clearRosterButton" destination="s7G-iR-K8f" id="7iI-oz-qxo"/>
                 <outlet property="controllerView" destination="PXr-Qw-q0c" id="lZr-BP-9Sa"/>
                 <outlet property="drawer" destination="8bx-dt-Kvb" id="Xpu-to-OJI"/>
@@ -24,6 +26,8 @@
                 <outlet property="formationButton" destination="chA-OI-fsC" id="HcN-mb-e6g"/>
                 <outlet property="formationView" destination="Zlc-5r-CKA" id="4xb-RJ-rly"/>
                 <outlet property="gameTimerView" destination="4De-t6-ZCx" id="mjb-m6-M3W"/>
+                <outlet property="grayPen" destination="K1y-wF-Oo3" id="gNU-SJ-2ce"/>
+                <outlet property="greenPen" destination="se1-aC-N8c" id="RCQ-ra-i20"/>
                 <outlet property="lastName" destination="GQ4-fm-qXK" id="NPr-l5-ZeM"/>
                 <outlet property="lastNameLabel" destination="Mg4-St-PbX" id="70w-tb-hla"/>
                 <outlet property="mainImage" destination="6on-8g-S60" id="kea-Gy-HfT"/>
@@ -57,15 +61,23 @@
                 <outlet property="player9Button" destination="KwW-Jl-zqL" id="tcb-xv-ey6"/>
                 <outlet property="player9View" destination="7tO-ht-p82" id="VNd-Q9-rIi"/>
                 <outlet property="quickSubstitution" destination="76J-yv-OES" id="1qt-1K-bs4"/>
+                <outlet property="redPen" destination="Yu7-3d-YGz" id="mvM-BN-WgG"/>
                 <outlet property="resetDrawingButton" destination="KKB-Wj-Fgs" id="yyw-dj-ujq"/>
                 <outlet property="rosterBackButton" destination="6F7-cx-dId" id="muz-ys-5Hw"/>
                 <outlet property="rosterButton" destination="1Qn-At-8oX" id="XYZ-uz-Axo"/>
                 <outlet property="rosterTable" destination="DYh-D0-kLN" id="nlw-IP-im1"/>
                 <outlet property="saveDrawingButton" destination="1IO-ZP-ihm" id="DZR-fa-PWF"/>
+                <outlet property="settingsBackButton" destination="pIY-4v-kwa" id="a2x-nl-cB4"/>
+                <outlet property="settingsBrushColorLabel" destination="C3Y-Pe-QUO" id="25a-Ru-5a5"/>
                 <outlet property="settingsButton" destination="Lhm-gT-dL6" id="z95-KV-XTV"/>
+                <outlet property="settingsLabel" destination="6Ap-il-87C" id="tlF-uU-3mP"/>
+                <outlet property="settingsSubmitButton" destination="aQ0-uw-nV9" id="aDi-f2-3kg"/>
+                <outlet property="settingsTeamNameLabel" destination="ynY-c3-esJ" id="oDY-8X-jhs"/>
+                <outlet property="settingsView" destination="jHm-4O-RCv" id="Glv-xM-mwu"/>
                 <outlet property="stopWatchTimerLabel" destination="AtD-6p-ofs" id="nJV-xa-oLA"/>
                 <outlet property="teamName" destination="QrM-FV-GEz" id="hRC-Dr-wJR"/>
                 <outlet property="teamName2" destination="E7Q-Eh-xco" id="oXc-iL-YQe"/>
+                <outlet property="teamNameSettings" destination="4za-bh-Fgo" id="l8L-PV-l7w"/>
                 <outlet property="tempDrawImage" destination="YxB-mM-9O8" id="b5b-pV-Bgi"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
@@ -117,6 +129,7 @@
                             </state>
                             <connections>
                                 <action selector="contactButtonPressed:" destination="-1" eventType="touchUpInside" id="mOl-wd-KPP"/>
+                                <action selector="settingsButtonPressed:" destination="-1" eventType="touchUpInside" id="BpX-as-FdP"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4De-t6-ZCx" userLabel="GameTimer">
@@ -156,6 +169,157 @@
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jHm-4O-RCv" userLabel="SettingsViewController">
+                            <rect key="frame" x="0.0" y="20" width="450" height="523"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEAM NAME:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynY-c3-esJ">
+                                    <rect key="frame" x="46" y="118" width="110" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BRUSH COLOR:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3Y-Pe-QUO">
+                                    <rect key="frame" x="22" y="168" width="129" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ap-il-87C">
+                                    <rect key="frame" x="170" y="20" width="110" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4za-bh-Fgo" userLabel="teamName TextField">
+                                    <rect key="frame" x="165" y="114" width="260" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIY-4v-kwa" userLabel="Button - Settings Back">
+                                    <rect key="frame" x="150" y="438" width="100" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="BACK">
+                                        <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="formationBackButtonPressed:" destination="-1" eventType="touchUpInside" id="Bo1-pC-C8w"/>
+                                        <action selector="rosterBackButtonPressed:" destination="-1" eventType="touchUpInside" id="cFK-zG-SrK"/>
+                                        <action selector="settingsBackButtonPressed:" destination="-1" eventType="touchUpInside" id="pp6-8c-bgN"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ0-uw-nV9" userLabel="Button - Settings Save">
+                                    <rect key="frame" x="275" y="438" width="100" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <state key="normal" title="SAVE">
+                                        <color key="titleColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="formationBackButtonPressed:" destination="-1" eventType="touchUpInside" id="9n5-zg-4xM"/>
+                                        <action selector="rosterBackButtonPressed:" destination="-1" eventType="touchUpInside" id="NWl-nZ-twj"/>
+                                        <action selector="settingsBackButtonPressed:" destination="-1" eventType="touchUpInside" id="MwA-s9-oHL"/>
+                                        <action selector="settingsSaveButtonPressed:" destination="-1" eventType="touchUpInside" id="6em-lM-bt9"/>
+                                    </connections>
+                                </button>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="klZ-dt-nG4" userLabel="View - Black">
+                                    <rect key="frame" x="160" y="154" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WZC-vW-N8c">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="blackPenPressed:" destination="-1" eventType="touchUpInside" id="9nT-DC-XQu"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RlE-OE-T26" userLabel="View - Grey">
+                                    <rect key="frame" x="215" y="154" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1y-wF-Oo3">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="greyPenPressed:" destination="-1" eventType="touchUpInside" id="7c0-UJ-sff"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0je-4k-xUj" userLabel="View - Red">
+                                    <rect key="frame" x="270" y="154" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yu7-3d-YGz">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="redPenPressed:" destination="-1" eventType="touchUpInside" id="rMF-8c-8Y5"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aeV-Hj-lhW" userLabel="View - Green">
+                                    <rect key="frame" x="325" y="154" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="se1-aC-N8c">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="greenPenPressed:" destination="-1" eventType="touchUpInside" id="mib-HE-uLW"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0015997068409999999" green="0.77345742979999998" blue="0.00248197652" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONm-b0-SvB" userLabel="View - Blue">
+                                    <rect key="frame" x="380" y="154" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2M-7R-YPR">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="bluePenPressed:" destination="-1" eventType="touchUpInside" id="BNY-lg-HyX"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXr-Qw-q0c" userLabel="RosterViewController">
                             <rect key="frame" x="0.0" y="0.0" width="450" height="523"/>

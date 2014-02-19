@@ -396,6 +396,18 @@
     rosterBackButton.layer.borderWidth = 2;
     //rosterBackButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
     rosterBackButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Settings Back Button
+    settingsBackButton.layer.cornerRadius = 5;
+    settingsBackButton.layer.borderWidth = 2;
+    //settingsBackButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    settingsBackButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Settings Submit Button
+    settingsSubmitButton.layer.cornerRadius = 5;
+    settingsSubmitButton.layer.borderWidth = 2;
+    //settingsSubmitButton.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    settingsSubmitButton.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
 }
 
 -(void) setCustomFontForEverything {
@@ -436,6 +448,12 @@
     player8Button.titleLabel.font = nikeTotal90_18;
     player9Button.titleLabel.font = nikeTotal90_18;
     player10Button.titleLabel.font = nikeTotal90_18;
+    
+    settingsSubmitButton.titleLabel.font = nikeTotal90_18;
+    settingsBackButton.titleLabel.font = nikeTotal90_18;
+    settingsBrushColorLabel.font = nikeTotal90;
+    settingsTeamNameLabel.font = nikeTotal90;
+    settingsLabel.font = nikeTotal90;
 }
 
 -(IBAction)rosterButtonPressed:(id)sender {
@@ -1080,9 +1098,9 @@
         saveDrawingButton.enabled = YES;
         resetDrawingButton.enabled = YES;
         
-        red = 0.0/255.0;
-        green = 0.0/255.0;
-        blue = 0.0/255.0;
+        //red = 0.0/255.0;
+        //green = 0.0/255.0;
+        //blue = 0.0/255.0;
     }
 }
 
@@ -1101,10 +1119,58 @@
     opacity = 1.0;
 }
 
--(IBAction)blackPencilPressed:(id)sender {
+-(IBAction)blackPenPressed:(id)sender {
     red = 0.0/255.0;
     green = 0.0/255.0;
     blue = 0.0/255.0;
+}
+
+-(IBAction)greyPenPressed:(id)sender {
+    red = 120.0/255.0;
+    green = 120.0/255.0;
+    blue = 120.0/255.0;
+}
+
+-(IBAction)redPenPressed:(id)sender {
+    red = 255.0/255.0;
+    green = 0.0/255.0;
+    blue = 0.0/255.0;
+}
+
+-(IBAction)greenPenPressed:(id)sender {
+    red = 0.0/255.0;
+    green = 255.0/255.0;
+    blue = 0.0/255.0;
+}
+
+-(IBAction)bluePenPressed:(id)sender {
+    red = 0.0/255.0;
+    green = 0.0/255.0;
+    blue = 255.0/255.0;
+}
+
+-(IBAction)settingsSaveButtonPressed:(id)sender {
+    
+    NSString *teamNameSave = teamNameSettings.text;
+    teamNameSave = [teamNameSave uppercaseString];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:teamNameSave forKey:@"teamName"];
+    teamNameSave = [[NSUserDefaults standardUserDefaults] stringForKey:@"teamName"];
+    
+    teamName.text = teamNameSave;
+    teamName2.text = teamNameSave;
+    NSLog(@"New team name saved: %@", teamNameSettings.text);
+    [self refreshUI];
+}
+
+-(IBAction)settingsBackButtonPressed:(id)sender {
+    settingsView.hidden = YES;
+}
+
+-(IBAction)settingsButtonPressed:(id)sender {
+    settingsView.hidden = NO;
+    
+    teamNameSettings.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"teamName"];
 }
 
 -(IBAction)choosePlayerFormation:(id)sender {
