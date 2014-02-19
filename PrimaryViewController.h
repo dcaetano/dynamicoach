@@ -19,6 +19,7 @@
     NSMutableArray *playerList_email;
     NSMutableArray *playerList_phoneNumber;
     NSString *selectedPlayer;
+    NSInteger formationNumber;
     BOOL pressedOK;
     id btnSender;
     

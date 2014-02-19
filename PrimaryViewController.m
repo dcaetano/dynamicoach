@@ -64,8 +64,6 @@
     [self toggleDrawingEnabled];
     [self toggleSubstitutionButtons];
     
-    [super viewDidLoad];
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *docsPath = [paths objectAtIndex:0];
     NSString *path = [docsPath stringByAppendingPathComponent:@"players.sqlite"];
@@ -84,16 +82,8 @@
     if([playerList_lastName count] == 0)
         [self repopulatePlayerList];
     
-    if([[NSUserDefaults standardUserDefaults]
-        stringForKey:@"saveFormation"]) {
-    btnSender = [[NSUserDefaults standardUserDefaults]
-                                stringForKey:@"saveFormation"];
-    
-        [self choosePlayerFormation:btnSender];
-    }
-    
-    [self getDefaultValues];
-    
+    [super viewDidLoad];
+
     //teamName.transform = CGAffineTransformMakeRotation((M_PI)/2);
     //teamName2.transform = CGAffineTransformMakeRotation(-(M_PI)/2);
     
@@ -106,7 +96,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+    NSLog(@"viewDidAppear");
+    [self getDefaultValues];
+    [self setCustomFontForEverything];
+    [super viewDidAppear:NO];
+}
+
 -(void) getDefaultValues {
+    
+    if([[NSUserDefaults standardUserDefaults]
+        integerForKey:@"setFormation"])
+    {
+        formationNumber = [[NSUserDefaults standardUserDefaults] integerForKey:@"setFormation"];
+        NSLog(@"formation # : %ld", (long)formationNumber);
+        [self formationSelected:formationNumber];
+        NSLog(@"formationSelected - went through");
+    }
     
     NSString *teamNameStr = [[NSUserDefaults standardUserDefaults]
                              stringForKey:@"teamName"];
@@ -115,28 +121,139 @@
     teamName2.text = teamNameStr;
     NSLog(@"Team Name: %@", teamNameStr);
     
-    player0Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player0"];
-    player1Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player1"];
-    player2Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player2"];
-    player3Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player3"];
-    player4Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player4"];
-    player5Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player5"];
-    player6Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player6"];
-    player7Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player7"];
-    player8Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player8"];
-    player9Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                     stringForKey:@"player9"];
-    player10Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
-                                      stringForKey:@"player10"];
+    NSString *playerLog;
+    
+    //Player 0
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player0"]) {
+        player0Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player0"];
+    }
+    else {
+        player0Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player0"];
+    NSLog(@"Player 0 - %@", playerLog);
+    
+    //Player 1
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player1"]) {
+        player1Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player1"];
+    }
+    else {
+        player1Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player1"];
+    NSLog(@"Player 1 - %@", playerLog);
+    
+    //Player 2
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player2"]) {
+        player2Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player2"];
+    }
+    else {
+        player2Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player2"];
+    NSLog(@"Player 2 - %@", playerLog);
+    
+    //Player 3
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player3"]) {
+        player3Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player3"];
+    }
+    else {
+        player3Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player3"];
+    NSLog(@"Player 3 - %@", playerLog);
+    
+    //Player 4
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player4"]) {
+        player4Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player4"];
+    }
+    else {
+        player4Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player4"];
+    NSLog(@"Player 4 - %@", playerLog);
+    
+    //Player 5
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player5"]) {
+        player5Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player5"];
+    }
+    else {
+        player5Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player5"];
+    NSLog(@"Player 5 - %@", playerLog);
+    
+    //Player 6
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player6"]) {
+        player6Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player6"];
+    }
+    else {
+        player6Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player6"];
+    NSLog(@"Player 6 - %@", playerLog);
+    
+    //Player 7
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player7"]) {
+        player7Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player7"];
+    }
+    else {
+        player7Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player7"];
+    NSLog(@"Player 7 - %@", playerLog);
+    
+    //Player 8
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player8"]) {
+        player8Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player8"];
+    }
+    else {
+        player8Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player8"];
+    NSLog(@"Player 8 - %@", playerLog);
+    
+    //Player 9
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player9"]) {
+        player9Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player9"];
+    }
+    else {
+        player9Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player9"];
+    NSLog(@"Player 9 - %@", playerLog);
+    
+    //Player 10
+    if([[NSUserDefaults standardUserDefaults] stringForKey:@"player10"]) {
+        player10Button.titleLabel.text = [[NSUserDefaults standardUserDefaults]
+                                         stringForKey:@"player10"];
+    }
+    else {
+        player10Button.titleLabel.text = @"SET PLAYER";
+    }
+    playerLog = [[NSUserDefaults standardUserDefaults]
+                 stringForKey:@"player10"];
+    NSLog(@"Player 10 - %@", playerLog);
 }
 
 -(void) setCustomFontForEverything {
@@ -815,12 +932,20 @@
 -(IBAction)choosePlayerFormation:(id)sender {
     
     btnSender = sender;
+
+    UIButton *pressedButton = (UIButton*)btnSender;
+    [self formationSelected:pressedButton.tag];
+    
+    formationNumber = pressedButton.tag;
+    [[NSUserDefaults standardUserDefaults] setInteger:formationNumber forKey:@"setFormation"];
+}
+
+-(void)formationSelected:(NSInteger)formation{
     
     CGFloat height = player0View.frame.size.height;
     CGFloat width = player0View.frame.size.width;
-
-    UIButton *pressedButton = (UIButton*)btnSender;
-    switch(pressedButton.tag)
+    
+    switch(formation)
     {
         case 2000: //4-4-2 Normal
             NSLog(@"4-4-2 (Normal) selected.");
@@ -904,7 +1029,7 @@
             player0View.frame = CGRectMake(43.0, 190.0, width, height);
             player1View.frame = CGRectMake(240.0, 190.0, width, height);
             player2View.frame = CGRectMake(427.0, 190.0, width, height);
-
+            
             //Midfielders - 3,4,5
             player3View.frame = CGRectMake(43.0, 375.0, width, height);
             player4View.frame = CGRectMake(240.0, 375.0, width, height);
@@ -1000,7 +1125,7 @@
             // Forwards - 0,1
             player0View.frame = CGRectMake(240.0, 160.0, width, height);
             player1View.frame = CGRectMake(240.0, 255.0, width, height);
-
+            
             //Midfielders - 2,3,4,5
             player2View.frame = CGRectMake(43.0, 415.0, width, height);
             player3View.frame = CGRectMake(166.0, 415.0, width, height);
@@ -1112,6 +1237,7 @@
             // Save as current default
             break;
     }
+
 }
 
 @end
