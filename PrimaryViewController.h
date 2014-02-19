@@ -32,6 +32,9 @@
     IBOutlet UIView *contactView;
     IBOutlet UIView *addPlayerView;
     
+    IBOutlet UIView *emptyRosterView;
+    IBOutlet UILabel *emptyRosterLabel;
+    
     IBOutlet UIView *player0View;
     IBOutlet UIView *player1View;
     IBOutlet UIView *player2View;

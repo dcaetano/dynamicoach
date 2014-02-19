@@ -83,6 +83,8 @@
     if([playerList_lastName count] == 0)
         [self repopulatePlayerList];
     
+    
+    [self checkforEmptyRoster];
     [super viewDidLoad];
 
     //teamName.transform = CGAffineTransformMakeRotation((M_PI)/2);
@@ -108,6 +110,16 @@
     [self getDefaultValues];
     [self setCustomFontForEverything];
     [self prettyButtonsFTW];
+    [self checkforEmptyRoster];
+}
+
+-(void) checkforEmptyRoster {
+    
+    NSLog(@"[playerList_lastName count] - %lu", (unsigned long)[playerList_lastName count]);
+    if([playerList_lastName count] < 1)
+        emptyRosterView.hidden = NO;
+    else
+        emptyRosterView.hidden = YES;
 }
 
 -(void) getDefaultValues {
@@ -498,6 +510,12 @@
     form2014.layer.borderWidth = 2;
     //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
     form2014.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+    
+    //Empty Roster View
+    emptyRosterView.layer.cornerRadius = 5;
+    emptyRosterView.layer.borderWidth = 2;
+    //form2000.layer.borderColor = [UIColor colorWithRed:0.0/255.0f green:197.0/255.0f blue:1.0/255.0f alpha:0.62].CGColor;
+    emptyRosterView.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
 }
 
 -(void) setCustomFontForEverything {
@@ -521,6 +539,7 @@
     clearRosterButton.titleLabel.font = nikeTotal90_18;
     settingsButton.titleLabel.font = nikeTotal90;
     
+    emptyRosterLabel.font = nikeTotal90;
     quickSubstitution.font = nikeTotal90;
     okModalBenchButton.titleLabel.font = nikeTotal90;
     firstNameLabel.font = nikeTotal90;
@@ -1038,6 +1057,8 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    [self checkforEmptyRoster];
+    
     return [playerList_lastName count];
 }
 
@@ -1053,9 +1074,72 @@
         NSString *playerToRemove = [playerList_lastName objectAtIndex:indexPath.row];
         [self deletePlayerFromRoster:playerToRemove];
         [self repopulatePlayerList];
+        [self playerDeletedSoUpdateWhiteboard:playerToRemove];
         NSLog(@"playerList_lastName: %@", playerList_lastName);
     }
     [rosterTable reloadData];
+}
+
+-(void)playerDeletedSoUpdateWhiteboard:(NSString*)playerRemoved {
+
+    NSLog(@"Player deleted so update whiteboard");
+    
+    if([player0Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player0Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player0"];
+    }
+    
+    if([player1Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player1Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player1"];
+    }
+    
+    if([player2Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player2Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player2"];
+    }
+    
+    if([player3Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player3Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player3"];
+    }
+    
+    if([player4Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player4Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player4"];
+    }
+    
+    if([player5Button.titleLabel.text isEqualToString:playerRemoved]){
+        [player5Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player5"];
+    }
+    
+    if([player6Button.titleLabel.text isEqualToString:playerRemoved]){
+        [player6Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player6"];
+    }
+    
+    if([player7Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player7Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player7"];
+    }
+    
+    if([player8Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player8Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player8"];
+    }
+    
+    if([player9Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player9Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player9"];
+    }
+    
+    if([player10Button.titleLabel.text isEqualToString:playerRemoved]) {
+        [player10Button setTitle:@"SET PLAYER" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"SET PLAYER" forKey:@"player10"];
+    }
+    
+    [self refreshUI];
 }
 
 //******************************************************************
